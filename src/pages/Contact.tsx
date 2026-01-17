@@ -2,8 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   {
@@ -34,6 +35,7 @@ const contactInfo = [
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,21 +45,57 @@ export default function ContactPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
-    toast({
-      title: "Пораката е испратена!",
-      description: "Ќе ве контактираме наскоро.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      destination: "",
-      date: "",
-      message: "",
-    });
+    
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      toast({
+        title: "Грешка",
+        description: "Ве молиме внесете име и телефон.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim() || "Не е внесен",
+          phone: formData.phone.trim(),
+          destination: formData.destination.trim(),
+          date: formData.date,
+          message: formData.message.trim() || "Нема порака",
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Пораката е испратена!",
+        description: "Ќе ве контактираме наскоро.",
+      });
+      
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        destination: "",
+        date: "",
+        message: "",
+      });
+    } catch (error: any) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Грешка при испраќање",
+        description: "Обидете се повторно или јавете се директно.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -236,9 +274,18 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <Button type="submit" variant="gold" size="lg" className="w-full">
-                    <Send className="w-5 h-5 mr-2" />
-                    Испрати барање
+                  <Button type="submit" variant="gold" size="lg" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Се испраќа...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Испрати барање
+                      </>
+                    )}
                   </Button>
                 </form>
               </div>
