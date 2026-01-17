@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Plane, MapPin, Mountain, Building, Home, Search } from "lucide-react";
+import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent } from "lucide-react";
 
 // Ценовник - сите цени се од Битола до дестинацијата
 const destinationCategories = [
@@ -11,230 +11,217 @@ const destinationCategories = [
     id: "airports",
     name: "Аеродроми",
     icon: Plane,
+    isForeign: false,
     destinations: [
-      { name: "Атина", distance: "582 км", price: "400 €" },
-      { name: "Белград", distance: "581 км", price: "370 €" },
-      { name: "Охрид", distance: "77 км", price: "3300 ден" },
-      { name: "Скопје", distance: "152 км", price: "5500 ден" },
-      { name: "Солун", distance: "214 км", price: "130 €" },
-      { name: "Софија", distance: "371 км", price: "250 €" },
-      { name: "Тирана", distance: "198 км", price: "150 €" },
+      { name: "Атина", priceMkd: null, priceEur: "400 €" },
+      { name: "Белград", priceMkd: null, priceEur: "370 €" },
+      { name: "Охрид", priceMkd: "3300 ден", priceEur: "55 €" },
+      { name: "Скопје", priceMkd: "5500 ден", priceEur: "90 €" },
+      { name: "Солун", priceMkd: null, priceEur: "130 €" },
+      { name: "Софија", priceMkd: null, priceEur: "250 €" },
+      { name: "Тирана", priceMkd: null, priceEur: "150 €" },
     ],
   },
   {
     id: "borders",
     name: "Гранични Премини",
     icon: MapPin,
+    isForeign: false,
     destinations: [
-      { name: "Блаце", distance: "189 км", price: "6300 ден" },
-      { name: "Богородица", distance: "173 км", price: "5500 ден" },
-      { name: "Деве Баир", distance: "249 км", price: "7200 ден" },
-      { name: "Меџитлија / Фришоп", distance: "15.4 км", price: "600/900 ден" },
-      { name: "Ново Село", distance: "216 км", price: "6500 ден" },
-      { name: "Стење", distance: "52 км", price: "1700 ден" },
-      { name: "Табановце", distance: "184 км", price: "6000 ден" },
-      { name: "Кафасан", distance: "94.9 км", price: "3800 ден" },
-    ],
-  },
-  {
-    id: "tourist",
-    name: "Туристички Дестинации",
-    icon: Mountain,
-    destinations: [
-      { name: "Бигорски Манастир", distance: "147 км", price: "4500 ден" },
-      { name: "Голема Ливада", distance: "-", price: "700 ден" },
-      { name: "Градиште Охрид", distance: "83 км", price: "3300 ден" },
-      { name: "Дебарски Бањи", distance: "139 км", price: "4900 ден" },
-      { name: "Детското Пелистер", distance: "12.2 км", price: "700 ден" },
-      { name: "Коњарка (излет)", distance: "39 км", price: "1300 ден" },
-      { name: "Кромберг & Шуберт", distance: "13 км", price: "450 ден" },
-      { name: "Крстоар Манастир", distance: "6.5 км", price: "300 ден" },
-      { name: "Маврово", distance: "129 км", price: "4300 ден" },
-      { name: "Мала Ливада", distance: "12.4 км", price: "700 ден" },
-      { name: "Молика", distance: "14.8 км", price: "800 ден" },
-      { name: "Негорски Бањи", distance: "166 км", price: "5500 ден" },
-      { name: "Попова Шапка", distance: "165 км", price: "5500 ден" },
-      { name: "РЕК Рудник", distance: "15.3 км", price: "500 ден" },
-      { name: "РЕК Термо", distance: "12.8 км", price: "450 ден" },
-      { name: "Свети Наум", distance: "97 км", price: "3800 ден" },
-    ],
-  },
-  {
-    id: "cities",
-    name: "Градови во Македонија",
-    icon: Building,
-    destinations: [
-      { name: "Берово", distance: "236 км", price: "6800 ден" },
-      { name: "Богданци", distance: "176 км", price: "5300 ден" },
-      { name: "Валандово", distance: "165 км", price: "5000 ден" },
-      { name: "Велес", distance: "121 км", price: "4000 ден" },
-      { name: "Виница", distance: "193 км", price: "5800 ден" },
-      { name: "Гевгелија", distance: "169 км", price: "5800 ден" },
-      { name: "Гостивар", distance: "124 км", price: "4200 ден" },
-      { name: "Дебар", distance: "134 км", price: "4700 ден" },
-      { name: "Делчево", distance: "233 км", price: "6800 ден" },
-      { name: "Демир Капија", distance: "128 км", price: "4000 ден" },
-      { name: "Демир Хисар", distance: "28 км", price: "900 ден" },
-      { name: "Дојран", distance: "181 км", price: "5700 ден" },
-      { name: "Кавадарци", distance: "89 км", price: "3200 ден" },
-      { name: "Кичево", distance: "79 км", price: "3000 ден" },
-      { name: "Кочани", distance: "185 км", price: "5800 ден" },
-      { name: "Кратово", distance: "226 км", price: "6300 ден" },
-      { name: "Крива Паланка", distance: "234 км", price: "6800 ден" },
-      { name: "Крушево", distance: "53 км", price: "2000 ден" },
-      { name: "Куманово", distance: "175 км", price: "6000 ден" },
-      { name: "Македонска Каменица", distance: "211 км", price: "6300 ден" },
-      { name: "Македонски Брод", distance: "82 км", price: "3000 ден" },
-      { name: "Неготино", distance: "101 км", price: "3500 ден" },
-      { name: "Охрид", distance: "69 км", price: "2800 ден" },
-      { name: "Пехчево", distance: "238 км", price: "6800 ден" },
-      { name: "Прилеп", distance: "43 км", price: "1400 ден" },
-      { name: "Пробиштип", distance: "187 км", price: "5800 ден" },
-      { name: "Радовиш", distance: "156 км", price: "5800 ден" },
-      { name: "Ресен", distance: "34 км", price: "1300 ден" },
-      { name: "Свети Николе", distance: "151 км", price: "4800 ден" },
-      { name: "Скопје", distance: "170 км", price: "6300 ден" },
-      { name: "Струга", distance: "83 км", price: "3300 ден" },
-      { name: "Струмица", distance: "187 км", price: "5800 ден" },
-      { name: "Тетово", distance: "150 км", price: "5000 ден" },
-      { name: "Штип", distance: "160 км", price: "4800 ден" },
-    ],
-  },
-  {
-    id: "villages",
-    name: "Села",
-    icon: Home,
-    destinations: [
-      { name: "Стрежево", distance: "23.1 км", price: "900 ден" },
-      { name: "Стругово", distance: "27.3 км", price: "900 ден" },
-      { name: "Суво Грло", distance: "38 км", price: "1200 ден" },
-      { name: "Суводол Д. Хисар", distance: "27.9 км", price: "900 ден" },
-      { name: "Суводол РЕК", distance: "20.4 км", price: "680 ден" },
-      { name: "Тепавци", distance: "22.3 км", price: "800 ден" },
-      { name: "Тополчани", distance: "25.5 км", price: "800 ден" },
-      { name: "Трап", distance: "19.4 км", price: "630 ден" },
-      { name: "Трн", distance: "8.6 км", price: "330 ден" },
-      { name: "Трново", distance: "7.8 км", price: "300 ден" },
-      { name: "Трновци", distance: "29.1 км", price: "950 ден" },
-      { name: "Тројкрсти", distance: "27.7 км", price: "900 ден" },
-      { name: "Трпејца", distance: "88.2 км", price: "3400 ден" },
-      { name: "Утово", distance: "24.7 км", price: "850 ден" },
-      { name: "Цапари", distance: "15.5 км", price: "530 ден" },
-      { name: "Царев Двор", distance: "32.7 км", price: "1200 ден" },
-      { name: "Цер", distance: "64.8 км", price: "2000 ден" },
-      { name: "Церово", distance: "52.3 км", price: "1800 ден" },
-      { name: "Црничани", distance: "24.9 км", price: "800 ден" },
-      { name: "Црнобуки", distance: "11.9 км", price: "400 ден" },
-      { name: "Црновец", distance: "20 км", price: "700 ден" },
-      { name: "Чарлија", distance: "19.1 км", price: "630 ден" },
-      { name: "Чепигово", distance: "29.9 км", price: "1000 ден" },
-      { name: "Штрбово", distance: "45.6 км", price: "1500 ден" },
+      { name: "Блаце", priceMkd: "6300 ден", priceEur: "100 €" },
+      { name: "Богородица", priceMkd: "5500 ден", priceEur: "90 €" },
+      { name: "Деве Баир", priceMkd: "7200 ден", priceEur: "115 €" },
+      { name: "Меџитлија / Фришоп", priceMkd: "600/900 ден", priceEur: "10/15 €" },
+      { name: "Ново Село", priceMkd: "6500 ден", priceEur: "105 €" },
+      { name: "Стење", priceMkd: "1700 ден", priceEur: "28 €" },
+      { name: "Табановце", priceMkd: "6000 ден", priceEur: "95 €" },
+      { name: "Кафасан", priceMkd: "3800 ден", priceEur: "60 €" },
     ],
   },
   {
     id: "greece",
     name: "Грција",
     icon: MapPin,
+    isForeign: true,
     destinations: [
-      { name: "Аминдео", distance: "61 км", price: "60 €" },
-      { name: "Аспровалта", distance: "295 км", price: "170 €" },
-      { name: "Атина", distance: "654 км", price: "400 €" },
-      { name: "Верија", distance: "155 км", price: "100 €" },
-      { name: "Воден", distance: "104 км", price: "90 €" },
-      { name: "Волос", distance: "289 км", price: "190 €" },
-      { name: "Врахос", distance: "340 км", price: "200 €" },
-      { name: "Гревена", distance: "150 км", price: "100 €" },
-      { name: "Игуменица", distance: "309 км", price: "180 €" },
-      { name: "Јанина", distance: "246 км", price: "160 €" },
-      { name: "Кавала", distance: "370 км", price: "220 €" },
-      { name: "Калитеа", distance: "285 км", price: "170 €" },
-      { name: "Катерини", distance: "223 км", price: "130 €" },
-      { name: "Кожани", distance: "108 км", price: "90 €" },
-      { name: "Костур", distance: "96 км", price: "100 €" },
-      { name: "Лариса", distance: "225 км", price: "140 €" },
-      { name: "Лептокарија", distance: "250 км", price: "150 €" },
-      { name: "Лерин", distance: "33 км", price: "45 €" },
-      { name: "Лефкада", distance: "363 км", price: "220 €" },
-      { name: "Лутраки", distance: "123 км", price: "90 €" },
-      { name: "Метеори", distance: "214 км", price: "140 €" },
-      { name: "Неаврасна", distance: "263 км", price: "170 €" },
-      { name: "Неапори", distance: "261 км", price: "170 €" },
-      { name: "Никити", distance: "299 км", price: "170 €" },
-      { name: "Паљури", distance: "313 км", price: "190 €" },
-      { name: "Паралија", distance: "226 км", price: "130 €" },
-      { name: "Парга", distance: "329 км", price: "200 €" },
-      { name: "Полихроно", distance: "78.9 км", price: "80 €" },
-      { name: "Птолемаида", distance: "-", price: "-" },
-      { name: "Сарти", distance: "339 км", price: "180 €" },
-      { name: "Солун", distance: "201 км", price: "130 €" },
-      { name: "Ставрос", distance: "336 км", price: "200 €" },
-      { name: "Торони", distance: "356 км", price: "190 €" },
-      { name: "Ураноуполис", distance: "300 км", price: "180 €" },
+      { name: "Аминдео", priceEur: "60 €" },
+      { name: "Аспровалта", priceEur: "170 €" },
+      { name: "Атина", priceEur: "400 €" },
+      { name: "Верија", priceEur: "100 €" },
+      { name: "Воден", priceEur: "90 €" },
+      { name: "Волос", priceEur: "190 €" },
+      { name: "Врахос", priceEur: "200 €" },
+      { name: "Гревена", priceEur: "100 €" },
+      { name: "Игуменица", priceEur: "180 €" },
+      { name: "Јанина", priceEur: "160 €" },
+      { name: "Кавала", priceEur: "220 €" },
+      { name: "Калитеа", priceEur: "170 €" },
+      { name: "Катерини", priceEur: "130 €" },
+      { name: "Кожани", priceEur: "90 €" },
+      { name: "Костур", priceEur: "100 €" },
+      { name: "Лариса", priceEur: "140 €" },
+      { name: "Лептокарија", priceEur: "150 €" },
+      { name: "Лерин", priceEur: "45 €" },
+      { name: "Лефкада", priceEur: "220 €" },
+      { name: "Лутраки", priceEur: "90 €" },
+      { name: "Метеори", priceEur: "140 €" },
+      { name: "Неаврасна", priceEur: "170 €" },
+      { name: "Неапори", priceEur: "170 €" },
+      { name: "Никити", priceEur: "170 €" },
+      { name: "Паљури", priceEur: "190 €" },
+      { name: "Паралија", priceEur: "130 €" },
+      { name: "Парга", priceEur: "200 €" },
+      { name: "Полихроно", priceEur: "170 €" },
+      { name: "Птолемаида", priceEur: "80 €" },
+      { name: "Сарти", priceEur: "180 €" },
+      { name: "Солун", priceEur: "130 €" },
+      { name: "Ставрос", priceEur: "200 €" },
+      { name: "Торони", priceEur: "190 €" },
+      { name: "Ураноуполис", priceEur: "180 €" },
     ],
   },
   {
     id: "serbia",
     name: "Србија",
     icon: MapPin,
+    isForeign: true,
     destinations: [
-      { name: "Белград", distance: "566 км", price: "370 €" },
-      { name: "Врање", distance: "232 км", price: "140 €" },
-      { name: "Владичин Хан", distance: "254 км", price: "150 €" },
-      { name: "Јагодина", distance: "434 км", price: "240 €" },
-      { name: "Крушевац", distance: "400 км", price: "240 €" },
-      { name: "Лесковац", distance: "296 км", price: "170 €" },
-      { name: "Ниш", distance: "340 км", price: "190 €" },
-      { name: "Нови Сад", distance: "662 км", price: "400 €" },
-    ],
-  },
-  {
-    id: "bulgaria",
-    name: "Бугарија",
-    icon: MapPin,
-    destinations: [
-      { name: "Банско", distance: "323 км", price: "180 €" },
-      { name: "Благоевград", distance: "272 км", price: "170 €" },
-      { name: "Варна", distance: "813 км", price: "650 €" },
-      { name: "Дупница", distance: "304 км", price: "180 €" },
-      { name: "Сандански", distance: "264 км", price: "170 €" },
-      { name: "Софија", distance: "367 км", price: "250 €" },
-      { name: "Кустендил", distance: "273 км", price: "170 €" },
+      { name: "Белград", priceEur: "370 €" },
+      { name: "Врање", priceEur: "140 €" },
+      { name: "Владичин Хан", priceEur: "150 €" },
+      { name: "Јагодина", priceEur: "240 €" },
+      { name: "Крушевац", priceEur: "240 €" },
+      { name: "Лесковац", priceEur: "170 €" },
+      { name: "Ниш", priceEur: "190 €" },
+      { name: "Нови Сад", priceEur: "400 €" },
     ],
   },
   {
     id: "albania",
     name: "Албанија",
     icon: MapPin,
+    isForeign: true,
     destinations: [
-      { name: "Валона", distance: "292 км", price: "170 €" },
-      { name: "Драч", distance: "234 км", price: "160 €" },
-      { name: "Елбасан", distance: "159 км", price: "100 €" },
-      { name: "Корча", distance: "97 км", price: "70 €" },
-      { name: "Ксамил", distance: "379 км", price: "240 €" },
-      { name: "Поградец", distance: "90 км", price: "70 €" },
-      { name: "Саранда", distance: "372 км", price: "240 €" },
-      { name: "Скадар", distance: "299 км", price: "230 €" },
-      { name: "Спиле", distance: "226 км", price: "150 €" },
-      { name: "Тирана", distance: "198 км", price: "150 €" },
+      { name: "Валона", priceEur: "170 €" },
+      { name: "Драч", priceEur: "160 €" },
+      { name: "Елбасан", priceEur: "100 €" },
+      { name: "Корча", priceEur: "70 €" },
+      { name: "Ксамил", priceEur: "240 €" },
+      { name: "Поградец", priceEur: "70 €" },
+      { name: "Саранда", priceEur: "240 €" },
+      { name: "Скадар", priceEur: "230 €" },
+      { name: "Спиле", priceEur: "150 €" },
+      { name: "Тирана", priceEur: "150 €" },
+    ],
+  },
+  {
+    id: "bulgaria",
+    name: "Бугарија",
+    icon: MapPin,
+    isForeign: true,
+    destinations: [
+      { name: "Банско", priceEur: "180 €" },
+      { name: "Благоевград", priceEur: "170 €" },
+      { name: "Варна", priceEur: "650 €" },
+      { name: "Дупница", priceEur: "180 €" },
+      { name: "Сандански", priceEur: "170 €" },
+      { name: "Софија", priceEur: "250 €" },
+      { name: "Кустендил", priceEur: "170 €" },
+    ],
+  },
+  {
+    id: "croatia",
+    name: "Хрватска",
+    icon: MapPin,
+    isForeign: true,
+    destinations: [
+      { name: "Загреб", priceEur: "500 €" },
+      { name: "Сплит", priceEur: "650 €" },
+      { name: "Дубровник", priceEur: "550 €" },
     ],
   },
   {
     id: "montenegro",
     name: "Црна Гора",
     icon: MapPin,
+    isForeign: true,
     destinations: [
-      { name: "Будва", distance: "379 км", price: "320 €" },
-      { name: "Манастир Острог", distance: "402 км", price: "330 €" },
-      { name: "Подгорица", distance: "358 км", price: "300 €" },
+      { name: "Будва", priceEur: "320 €" },
+      { name: "Манастир Острог", priceEur: "330 €" },
+      { name: "Подгорица", priceEur: "300 €" },
     ],
   },
   {
     id: "kosovo",
     name: "Косово",
     icon: MapPin,
+    isForeign: true,
     destinations: [
-      { name: "Ѓилане", distance: "224 км", price: "160 €" },
-      { name: "Приштина", distance: "259 км", price: "150 €" },
+      { name: "Ѓилане", priceEur: "160 €" },
+      { name: "Приштина", priceEur: "150 €" },
+    ],
+  },
+  {
+    id: "tourist",
+    name: "Туристички Дестинации",
+    icon: Mountain,
+    isForeign: false,
+    destinations: [
+      { name: "Бигорски Манастир", priceMkd: "4500 ден", priceEur: "73 €" },
+      { name: "Голема Ливада", priceMkd: "700 ден", priceEur: "12 €" },
+      { name: "Градиште Охрид", priceMkd: "3300 ден", priceEur: "55 €" },
+      { name: "Дебарски Бањи", priceMkd: "4900 ден", priceEur: "80 €" },
+      { name: "Детското Пелистер", priceMkd: "700 ден", priceEur: "12 €" },
+      { name: "Коњарка (излет)", priceMkd: "1300 ден", priceEur: "21 €" },
+      { name: "Крстоар Манастир", priceMkd: "300 ден", priceEur: "5 €" },
+      { name: "Маврово", priceMkd: "4300 ден", priceEur: "70 €" },
+      { name: "Мала Ливада", priceMkd: "700 ден", priceEur: "12 €" },
+      { name: "Молика", priceMkd: "800 ден", priceEur: "13 €" },
+      { name: "Негорски Бањи", priceMkd: "5500 ден", priceEur: "90 €" },
+      { name: "Попова Шапка", priceMkd: "5500 ден", priceEur: "90 €" },
+      { name: "Свети Наум", priceMkd: "3800 ден", priceEur: "62 €" },
+    ],
+  },
+  {
+    id: "cities",
+    name: "Градови во Македонија",
+    icon: Building,
+    isForeign: false,
+    destinations: [
+      { name: "Берово", priceMkd: "6800 ден", priceEur: "110 €" },
+      { name: "Богданци", priceMkd: "5300 ден", priceEur: "86 €" },
+      { name: "Валандово", priceMkd: "5000 ден", priceEur: "81 €" },
+      { name: "Велес", priceMkd: "4000 ден", priceEur: "65 €" },
+      { name: "Виница", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Гевгелија", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Гостивар", priceMkd: "4200 ден", priceEur: "68 €" },
+      { name: "Дебар", priceMkd: "4700 ден", priceEur: "76 €" },
+      { name: "Делчево", priceMkd: "6800 ден", priceEur: "110 €" },
+      { name: "Демир Капија", priceMkd: "4000 ден", priceEur: "65 €" },
+      { name: "Демир Хисар", priceMkd: "900 ден", priceEur: "15 €" },
+      { name: "Дојран", priceMkd: "5700 ден", priceEur: "93 €" },
+      { name: "Кавадарци", priceMkd: "3200 ден", priceEur: "52 €" },
+      { name: "Кичево", priceMkd: "3000 ден", priceEur: "49 €" },
+      { name: "Кочани", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Кратово", priceMkd: "6300 ден", priceEur: "102 €" },
+      { name: "Крива Паланка", priceMkd: "6800 ден", priceEur: "110 €" },
+      { name: "Крушево", priceMkd: "2000 ден", priceEur: "32 €" },
+      { name: "Куманово", priceMkd: "6000 ден", priceEur: "97 €" },
+      { name: "Македонска Каменица", priceMkd: "6300 ден", priceEur: "102 €" },
+      { name: "Македонски Брод", priceMkd: "3000 ден", priceEur: "49 €" },
+      { name: "Неготино", priceMkd: "3500 ден", priceEur: "57 €" },
+      { name: "Охрид", priceMkd: "2800 ден", priceEur: "45 €" },
+      { name: "Пехчево", priceMkd: "6800 ден", priceEur: "110 €" },
+      { name: "Прилеп", priceMkd: "1400 ден", priceEur: "23 €" },
+      { name: "Пробиштип", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Радовиш", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Ресен", priceMkd: "1300 ден", priceEur: "21 €" },
+      { name: "Свети Николе", priceMkd: "4800 ден", priceEur: "78 €" },
+      { name: "Скопје", priceMkd: "6300 ден", priceEur: "102 €" },
+      { name: "Струга", priceMkd: "3300 ден", priceEur: "54 €" },
+      { name: "Струмица", priceMkd: "5800 ден", priceEur: "94 €" },
+      { name: "Тетово", priceMkd: "5000 ден", priceEur: "81 €" },
+      { name: "Штип", priceMkd: "4800 ден", priceEur: "78 €" },
     ],
   },
 ];
@@ -273,8 +260,8 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      {/* Category Tabs */}
-      <section className="py-8 bg-secondary/30 sticky top-[72px] z-40 backdrop-blur-lg">
+      {/* Category Tabs - Fixed position on mobile */}
+      <section className="py-8 bg-secondary/95 sticky top-[72px] z-40">
         <div className="container-luxury">
           <div className="flex flex-wrap justify-center gap-3">
             {destinationCategories.map((category) => (
@@ -296,7 +283,7 @@ export default function DestinationsPage() {
       </section>
 
       {/* Search & Results */}
-      <section className="section-padding">
+      <section className="section-padding relative z-10 bg-background">
         <div className="container-luxury">
           {/* Search */}
           <div className="max-w-md mx-auto mb-12">
@@ -331,7 +318,6 @@ export default function DestinationsPage() {
                 <thead className="bg-secondary/50">
                   <tr>
                     <th className="text-left px-6 py-4 text-sm font-semibold text-foreground">Дестинација</th>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-foreground">Растојание</th>
                     <th className="text-right px-6 py-4 text-sm font-semibold text-foreground">Цена</th>
                   </tr>
                 </thead>
@@ -345,9 +331,17 @@ export default function DestinationsPage() {
                       className="hover:bg-secondary/30 transition-colors"
                     >
                       <td className="px-6 py-4 text-foreground font-medium">{dest.name}</td>
-                      <td className="px-6 py-4 text-muted-foreground">{dest.distance}</td>
                       <td className="px-6 py-4 text-right">
-                        <span className="text-primary font-semibold">{dest.price}</span>
+                        {activeData?.isForeign ? (
+                          <span className="text-primary font-semibold">{dest.priceEur}</span>
+                        ) : (
+                          <div className="flex flex-col items-end gap-1">
+                            {"priceMkd" in dest && dest.priceMkd && (
+                              <span className="text-primary font-semibold">{String(dest.priceMkd)}</span>
+                            )}
+                            <span className="text-muted-foreground text-sm">{dest.priceEur}</span>
+                          </div>
+                        )}
                       </td>
                     </motion.tr>
                   ))}
@@ -356,10 +350,53 @@ export default function DestinationsPage() {
             </div>
           </motion.div>
 
-          {/* Note */}
-          <p className="text-center text-muted-foreground mt-8">
-            * Чекање: 1 час = 400 ден. | Сите цени се од Битола до дестинацијата и обратно.
-          </p>
+          {/* Payment Info */}
+          <div className="mt-12 space-y-6">
+            {/* Payment Methods */}
+            <div className="luxury-card p-6">
+              <h3 className="text-lg font-serif font-semibold text-foreground mb-4 flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-primary" />
+                Начини на плаќање
+              </h3>
+              <div className="flex flex-wrap gap-6">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Banknote className="w-5 h-5 text-primary" />
+                  <span>Готовина</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <CreditCard className="w-5 h-5 text-primary" />
+                  <span>Картица</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <FileText className="w-5 h-5 text-primary" />
+                  <span>Фактура</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Discount Info */}
+            <div className="luxury-card p-6 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Percent className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
+                    Попуст за авансно плаќање
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Добијте <span className="text-primary font-semibold">10% до 15% попуст</span> доколку 
+                    платите и резервирате однапред!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Note */}
+            <p className="text-center text-muted-foreground">
+              * Чекање: 1 час = 400 ден. | Сите цени се од Битола до дестинацијата и обратно.
+            </p>
+          </div>
         </div>
       </section>
 
