@@ -9,8 +9,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Телефон",
-    value: "+389 70 123 456",
-    href: "tel:+38970123456",
+    value: "+389 75 269 459",
+    href: "tel:+38975269459",
   },
   {
     icon: Mail,
