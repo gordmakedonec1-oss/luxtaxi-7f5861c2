@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Услуги", path: "/services" },
   { name: "Возен Парк", path: "/fleet" },
   { name: "Дестинации", path: "/destinations" },
+  { name: "Рецензии", path: "/reviews" },
   { name: "За Нас", path: "/about" },
   { name: "Контакт", path: "/contact" },
 ];
