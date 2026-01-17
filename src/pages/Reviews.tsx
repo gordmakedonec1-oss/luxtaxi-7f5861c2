@@ -11,7 +11,6 @@ interface Review {
   name: string | null;
   rating: number;
   comment: string;
-  is_anonymous: boolean;
   created_at: string;
 }
 
@@ -34,8 +33,9 @@ export default function ReviewsPage() {
 
   const fetchReviews = async () => {
     try {
+      // Use the secure public_reviews view that excludes email addresses
       const { data, error } = await supabase
-        .from("reviews")
+        .from("public_reviews")
         .select("*")
         .order("created_at", { ascending: false });
 
