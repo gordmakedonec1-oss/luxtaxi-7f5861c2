@@ -6,21 +6,36 @@ import { Link } from "react-router-dom";
 import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+interface Destination {
+  nameMk: string;
+  nameEn: string;
+  priceMkd?: string | null;
+  priceEur: string;
+}
+
+interface DestinationCategory {
+  id: string;
+  nameKey: string;
+  icon: typeof Plane;
+  isForeign: boolean;
+  destinations: Destination[];
+}
+
 // Ценовник - сите цени се од Битола до дестинацијата
-const destinationCategories = [
+const destinationCategories: DestinationCategory[] = [
   {
     id: "airports",
     nameKey: "destinationsPage.airports",
     icon: Plane,
     isForeign: false,
     destinations: [
-      { name: "Атина", priceMkd: null, priceEur: "400 €" },
-      { name: "Белград", priceMkd: null, priceEur: "370 €" },
-      { name: "Охрид", priceMkd: "3300 ден", priceEur: "55 €" },
-      { name: "Скопје", priceMkd: "5500 ден", priceEur: "90 €" },
-      { name: "Солун", priceMkd: null, priceEur: "130 €" },
-      { name: "Софија", priceMkd: null, priceEur: "250 €" },
-      { name: "Тирана", priceMkd: null, priceEur: "150 €" },
+      { nameMk: "Атина", nameEn: "Athens", priceMkd: null, priceEur: "400 €" },
+      { nameMk: "Белград", nameEn: "Belgrade", priceMkd: null, priceEur: "370 €" },
+      { nameMk: "Охрид", nameEn: "Ohrid", priceMkd: "3300 ден", priceEur: "55 €" },
+      { nameMk: "Скопје", nameEn: "Skopje", priceMkd: "5500 ден", priceEur: "90 €" },
+      { nameMk: "Солун", nameEn: "Thessaloniki", priceMkd: null, priceEur: "130 €" },
+      { nameMk: "Софија", nameEn: "Sofia", priceMkd: null, priceEur: "250 €" },
+      { nameMk: "Тирана", nameEn: "Tirana", priceMkd: null, priceEur: "150 €" },
     ],
   },
   {
@@ -29,14 +44,14 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: false,
     destinations: [
-      { name: "Блаце", priceMkd: "6300 ден", priceEur: "100 €" },
-      { name: "Богородица", priceMkd: "5500 ден", priceEur: "90 €" },
-      { name: "Деве Баир", priceMkd: "7200 ден", priceEur: "115 €" },
-      { name: "Меџитлија / Фришоп", priceMkd: "600/900 ден", priceEur: "10/15 €" },
-      { name: "Ново Село", priceMkd: "6500 ден", priceEur: "105 €" },
-      { name: "Стење", priceMkd: "1700 ден", priceEur: "28 €" },
-      { name: "Табановце", priceMkd: "6000 ден", priceEur: "95 €" },
-      { name: "Кафасан", priceMkd: "3800 ден", priceEur: "60 €" },
+      { nameMk: "Блаце", nameEn: "Blace", priceMkd: "6300 ден", priceEur: "100 €" },
+      { nameMk: "Богородица", nameEn: "Bogorodica", priceMkd: "5500 ден", priceEur: "90 €" },
+      { nameMk: "Деве Баир", nameEn: "Deve Bair", priceMkd: "7200 ден", priceEur: "115 €" },
+      { nameMk: "Меџитлија / Фришоп", nameEn: "Medzitlija / Free Shop", priceMkd: "600/900 ден", priceEur: "10/15 €" },
+      { nameMk: "Ново Село", nameEn: "Novo Selo", priceMkd: "6500 ден", priceEur: "105 €" },
+      { nameMk: "Стење", nameEn: "Stenje", priceMkd: "1700 ден", priceEur: "28 €" },
+      { nameMk: "Табановце", nameEn: "Tabanovce", priceMkd: "6000 ден", priceEur: "95 €" },
+      { nameMk: "Кафасан", nameEn: "Kafasan", priceMkd: "3800 ден", priceEur: "60 €" },
     ],
   },
   {
@@ -45,40 +60,40 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Аминдео", priceEur: "60 €" },
-      { name: "Аспровалта", priceEur: "170 €" },
-      { name: "Атина", priceEur: "400 €" },
-      { name: "Верија", priceEur: "100 €" },
-      { name: "Воден", priceEur: "90 €" },
-      { name: "Волос", priceEur: "190 €" },
-      { name: "Врахос", priceEur: "200 €" },
-      { name: "Гревена", priceEur: "100 €" },
-      { name: "Игуменица", priceEur: "180 €" },
-      { name: "Јанина", priceEur: "160 €" },
-      { name: "Кавала", priceEur: "220 €" },
-      { name: "Калитеа", priceEur: "170 €" },
-      { name: "Катерини", priceEur: "130 €" },
-      { name: "Кожани", priceEur: "90 €" },
-      { name: "Костур", priceEur: "100 €" },
-      { name: "Лариса", priceEur: "140 €" },
-      { name: "Лептокарија", priceEur: "150 €" },
-      { name: "Лерин", priceEur: "45 €" },
-      { name: "Лефкада", priceEur: "220 €" },
-      { name: "Лутраки", priceEur: "90 €" },
-      { name: "Метеори", priceEur: "140 €" },
-      { name: "Неаврасна", priceEur: "170 €" },
-      { name: "Неапори", priceEur: "170 €" },
-      { name: "Никити", priceEur: "170 €" },
-      { name: "Паљури", priceEur: "190 €" },
-      { name: "Паралија", priceEur: "130 €" },
-      { name: "Парга", priceEur: "200 €" },
-      { name: "Полихроно", priceEur: "170 €" },
-      { name: "Птолемаида", priceEur: "80 €" },
-      { name: "Сарти", priceEur: "180 €" },
-      { name: "Солун", priceEur: "130 €" },
-      { name: "Ставрос", priceEur: "200 €" },
-      { name: "Торони", priceEur: "190 €" },
-      { name: "Ураноуполис", priceEur: "180 €" },
+      { nameMk: "Аминдео", nameEn: "Amyndeo", priceEur: "60 €" },
+      { nameMk: "Аспровалта", nameEn: "Asprovalta", priceEur: "170 €" },
+      { nameMk: "Атина", nameEn: "Athens", priceEur: "400 €" },
+      { nameMk: "Верија", nameEn: "Veria", priceEur: "100 €" },
+      { nameMk: "Воден", nameEn: "Edessa", priceEur: "90 €" },
+      { nameMk: "Волос", nameEn: "Volos", priceEur: "190 €" },
+      { nameMk: "Врахос", nameEn: "Vrahos", priceEur: "200 €" },
+      { nameMk: "Гревена", nameEn: "Grevena", priceEur: "100 €" },
+      { nameMk: "Игуменица", nameEn: "Igoumenitsa", priceEur: "180 €" },
+      { nameMk: "Јанина", nameEn: "Ioannina", priceEur: "160 €" },
+      { nameMk: "Кавала", nameEn: "Kavala", priceEur: "220 €" },
+      { nameMk: "Калитеа", nameEn: "Kallithea", priceEur: "170 €" },
+      { nameMk: "Катерини", nameEn: "Katerini", priceEur: "130 €" },
+      { nameMk: "Кожани", nameEn: "Kozani", priceEur: "90 €" },
+      { nameMk: "Костур", nameEn: "Kastoria", priceEur: "100 €" },
+      { nameMk: "Лариса", nameEn: "Larissa", priceEur: "140 €" },
+      { nameMk: "Лептокарија", nameEn: "Leptokarya", priceEur: "150 €" },
+      { nameMk: "Лерин", nameEn: "Florina", priceEur: "45 €" },
+      { nameMk: "Лефкада", nameEn: "Lefkada", priceEur: "220 €" },
+      { nameMk: "Лутраки", nameEn: "Loutraki", priceEur: "90 €" },
+      { nameMk: "Метеори", nameEn: "Meteora", priceEur: "140 €" },
+      { nameMk: "Неаврасна", nameEn: "Nea Vrasna", priceEur: "170 €" },
+      { nameMk: "Неапори", nameEn: "Nea Peramos", priceEur: "170 €" },
+      { nameMk: "Никити", nameEn: "Nikiti", priceEur: "170 €" },
+      { nameMk: "Паљури", nameEn: "Paliouri", priceEur: "190 €" },
+      { nameMk: "Паралија", nameEn: "Paralia", priceEur: "130 €" },
+      { nameMk: "Парга", nameEn: "Parga", priceEur: "200 €" },
+      { nameMk: "Полихроно", nameEn: "Polychrono", priceEur: "170 €" },
+      { nameMk: "Птолемаида", nameEn: "Ptolemaida", priceEur: "80 €" },
+      { nameMk: "Сарти", nameEn: "Sarti", priceEur: "180 €" },
+      { nameMk: "Солун", nameEn: "Thessaloniki", priceEur: "130 €" },
+      { nameMk: "Ставрос", nameEn: "Stavros", priceEur: "200 €" },
+      { nameMk: "Торони", nameEn: "Toroni", priceEur: "190 €" },
+      { nameMk: "Ураноуполис", nameEn: "Ouranoupoli", priceEur: "180 €" },
     ],
   },
   {
@@ -87,14 +102,14 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Белград", priceEur: "370 €" },
-      { name: "Врање", priceEur: "140 €" },
-      { name: "Владичин Хан", priceEur: "150 €" },
-      { name: "Јагодина", priceEur: "240 €" },
-      { name: "Крушевац", priceEur: "240 €" },
-      { name: "Лесковац", priceEur: "170 €" },
-      { name: "Ниш", priceEur: "190 €" },
-      { name: "Нови Сад", priceEur: "400 €" },
+      { nameMk: "Белград", nameEn: "Belgrade", priceEur: "370 €" },
+      { nameMk: "Врање", nameEn: "Vranje", priceEur: "140 €" },
+      { nameMk: "Владичин Хан", nameEn: "Vladicin Han", priceEur: "150 €" },
+      { nameMk: "Јагодина", nameEn: "Jagodina", priceEur: "240 €" },
+      { nameMk: "Крушевац", nameEn: "Krusevac", priceEur: "240 €" },
+      { nameMk: "Лесковац", nameEn: "Leskovac", priceEur: "170 €" },
+      { nameMk: "Ниш", nameEn: "Nis", priceEur: "190 €" },
+      { nameMk: "Нови Сад", nameEn: "Novi Sad", priceEur: "400 €" },
     ],
   },
   {
@@ -103,16 +118,16 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Валона", priceEur: "170 €" },
-      { name: "Драч", priceEur: "160 €" },
-      { name: "Елбасан", priceEur: "100 €" },
-      { name: "Корча", priceEur: "70 €" },
-      { name: "Ксамил", priceEur: "240 €" },
-      { name: "Поградец", priceEur: "70 €" },
-      { name: "Саранда", priceEur: "240 €" },
-      { name: "Скадар", priceEur: "230 €" },
-      { name: "Спиле", priceEur: "150 €" },
-      { name: "Тирана", priceEur: "150 €" },
+      { nameMk: "Валона", nameEn: "Vlora", priceEur: "170 €" },
+      { nameMk: "Драч", nameEn: "Durres", priceEur: "160 €" },
+      { nameMk: "Елбасан", nameEn: "Elbasan", priceEur: "100 €" },
+      { nameMk: "Корча", nameEn: "Korca", priceEur: "70 €" },
+      { nameMk: "Ксамил", nameEn: "Ksamil", priceEur: "240 €" },
+      { nameMk: "Поградец", nameEn: "Pogradec", priceEur: "70 €" },
+      { nameMk: "Саранда", nameEn: "Saranda", priceEur: "240 €" },
+      { nameMk: "Скадар", nameEn: "Shkoder", priceEur: "230 €" },
+      { nameMk: "Спиле", nameEn: "Spille", priceEur: "150 €" },
+      { nameMk: "Тирана", nameEn: "Tirana", priceEur: "150 €" },
     ],
   },
   {
@@ -121,13 +136,13 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Банско", priceEur: "180 €" },
-      { name: "Благоевград", priceEur: "170 €" },
-      { name: "Варна", priceEur: "650 €" },
-      { name: "Дупница", priceEur: "180 €" },
-      { name: "Сандански", priceEur: "170 €" },
-      { name: "Софија", priceEur: "250 €" },
-      { name: "Кустендил", priceEur: "170 €" },
+      { nameMk: "Банско", nameEn: "Bansko", priceEur: "180 €" },
+      { nameMk: "Благоевград", nameEn: "Blagoevgrad", priceEur: "170 €" },
+      { nameMk: "Варна", nameEn: "Varna", priceEur: "650 €" },
+      { nameMk: "Дупница", nameEn: "Dupnitsa", priceEur: "180 €" },
+      { nameMk: "Сандански", nameEn: "Sandanski", priceEur: "170 €" },
+      { nameMk: "Софија", nameEn: "Sofia", priceEur: "250 €" },
+      { nameMk: "Кустендил", nameEn: "Kyustendil", priceEur: "170 €" },
     ],
   },
   {
@@ -136,9 +151,9 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Загреб", priceEur: "500 €" },
-      { name: "Сплит", priceEur: "650 €" },
-      { name: "Дубровник", priceEur: "550 €" },
+      { nameMk: "Загреб", nameEn: "Zagreb", priceEur: "500 €" },
+      { nameMk: "Сплит", nameEn: "Split", priceEur: "650 €" },
+      { nameMk: "Дубровник", nameEn: "Dubrovnik", priceEur: "550 €" },
     ],
   },
   {
@@ -147,9 +162,9 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Будва", priceEur: "320 €" },
-      { name: "Манастир Острог", priceEur: "330 €" },
-      { name: "Подгорица", priceEur: "300 €" },
+      { nameMk: "Будва", nameEn: "Budva", priceEur: "320 €" },
+      { nameMk: "Манастир Острог", nameEn: "Ostrog Monastery", priceEur: "330 €" },
+      { nameMk: "Подгорица", nameEn: "Podgorica", priceEur: "300 €" },
     ],
   },
   {
@@ -158,8 +173,8 @@ const destinationCategories = [
     icon: MapPin,
     isForeign: true,
     destinations: [
-      { name: "Ѓилане", priceEur: "160 €" },
-      { name: "Приштина", priceEur: "150 €" },
+      { nameMk: "Ѓилане", nameEn: "Gjilan", priceEur: "160 €" },
+      { nameMk: "Приштина", nameEn: "Pristina", priceEur: "150 €" },
     ],
   },
   {
@@ -168,19 +183,19 @@ const destinationCategories = [
     icon: Mountain,
     isForeign: false,
     destinations: [
-      { name: "Бигорски Манастир", priceMkd: "4500 ден", priceEur: "73 €" },
-      { name: "Голема Ливада", priceMkd: "700 ден", priceEur: "12 €" },
-      { name: "Градиште Охрид", priceMkd: "3300 ден", priceEur: "55 €" },
-      { name: "Дебарски Бањи", priceMkd: "4900 ден", priceEur: "80 €" },
-      { name: "Детското Пелистер", priceMkd: "700 ден", priceEur: "12 €" },
-      { name: "Коњарка (излет)", priceMkd: "1300 ден", priceEur: "21 €" },
-      { name: "Крстоар Манастир", priceMkd: "300 ден", priceEur: "5 €" },
-      { name: "Маврово", priceMkd: "4300 ден", priceEur: "70 €" },
-      { name: "Мала Ливада", priceMkd: "700 ден", priceEur: "12 €" },
-      { name: "Молика", priceMkd: "800 ден", priceEur: "13 €" },
-      { name: "Негорски Бањи", priceMkd: "5500 ден", priceEur: "90 €" },
-      { name: "Попова Шапка", priceMkd: "5500 ден", priceEur: "90 €" },
-      { name: "Свети Наум", priceMkd: "3800 ден", priceEur: "62 €" },
+      { nameMk: "Бигорски Манастир", nameEn: "Bigorski Monastery", priceMkd: "4500 ден", priceEur: "73 €" },
+      { nameMk: "Голема Ливада", nameEn: "Golema Livada", priceMkd: "700 ден", priceEur: "12 €" },
+      { nameMk: "Градиште Охрид", nameEn: "Gradiste Ohrid", priceMkd: "3300 ден", priceEur: "55 €" },
+      { nameMk: "Дебарски Бањи", nameEn: "Debar Spa", priceMkd: "4900 ден", priceEur: "80 €" },
+      { nameMk: "Детското Пелистер", nameEn: "Pelister Children's Resort", priceMkd: "700 ден", priceEur: "12 €" },
+      { nameMk: "Коњарка (излет)", nameEn: "Konjarka (excursion)", priceMkd: "1300 ден", priceEur: "21 €" },
+      { nameMk: "Крстоар Манастир", nameEn: "Krstoar Monastery", priceMkd: "300 ден", priceEur: "5 €" },
+      { nameMk: "Маврово", nameEn: "Mavrovo", priceMkd: "4300 ден", priceEur: "70 €" },
+      { nameMk: "Мала Ливада", nameEn: "Mala Livada", priceMkd: "700 ден", priceEur: "12 €" },
+      { nameMk: "Молика", nameEn: "Molika", priceMkd: "800 ден", priceEur: "13 €" },
+      { nameMk: "Негорски Бањи", nameEn: "Negorski Spa", priceMkd: "5500 ден", priceEur: "90 €" },
+      { nameMk: "Попова Шапка", nameEn: "Popova Shapka", priceMkd: "5500 ден", priceEur: "90 €" },
+      { nameMk: "Свети Наум", nameEn: "St. Naum", priceMkd: "3800 ден", priceEur: "62 €" },
     ],
   },
   {
@@ -189,53 +204,57 @@ const destinationCategories = [
     icon: Building,
     isForeign: false,
     destinations: [
-      { name: "Берово", priceMkd: "6800 ден", priceEur: "110 €" },
-      { name: "Богданци", priceMkd: "5300 ден", priceEur: "86 €" },
-      { name: "Валандово", priceMkd: "5000 ден", priceEur: "81 €" },
-      { name: "Велес", priceMkd: "4000 ден", priceEur: "65 €" },
-      { name: "Виница", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Гевгелија", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Гостивар", priceMkd: "4200 ден", priceEur: "68 €" },
-      { name: "Дебар", priceMkd: "4700 ден", priceEur: "76 €" },
-      { name: "Делчево", priceMkd: "6800 ден", priceEur: "110 €" },
-      { name: "Демир Капија", priceMkd: "4000 ден", priceEur: "65 €" },
-      { name: "Демир Хисар", priceMkd: "900 ден", priceEur: "15 €" },
-      { name: "Дојран", priceMkd: "5700 ден", priceEur: "93 €" },
-      { name: "Кавадарци", priceMkd: "3200 ден", priceEur: "52 €" },
-      { name: "Кичево", priceMkd: "3000 ден", priceEur: "49 €" },
-      { name: "Кочани", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Кратово", priceMkd: "6300 ден", priceEur: "102 €" },
-      { name: "Крива Паланка", priceMkd: "6800 ден", priceEur: "110 €" },
-      { name: "Крушево", priceMkd: "2000 ден", priceEur: "32 €" },
-      { name: "Куманово", priceMkd: "6000 ден", priceEur: "97 €" },
-      { name: "Македонска Каменица", priceMkd: "6300 ден", priceEur: "102 €" },
-      { name: "Македонски Брод", priceMkd: "3000 ден", priceEur: "49 €" },
-      { name: "Неготино", priceMkd: "3500 ден", priceEur: "57 €" },
-      { name: "Охрид", priceMkd: "2800 ден", priceEur: "45 €" },
-      { name: "Пехчево", priceMkd: "6800 ден", priceEur: "110 €" },
-      { name: "Прилеп", priceMkd: "1400 ден", priceEur: "23 €" },
-      { name: "Пробиштип", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Радовиш", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Ресен", priceMkd: "1300 ден", priceEur: "21 €" },
-      { name: "Свети Николе", priceMkd: "4800 ден", priceEur: "78 €" },
-      { name: "Скопје", priceMkd: "6300 ден", priceEur: "102 €" },
-      { name: "Струга", priceMkd: "3300 ден", priceEur: "54 €" },
-      { name: "Струмица", priceMkd: "5800 ден", priceEur: "94 €" },
-      { name: "Тетово", priceMkd: "5000 ден", priceEur: "81 €" },
-      { name: "Штип", priceMkd: "4800 ден", priceEur: "78 €" },
+      { nameMk: "Берово", nameEn: "Berovo", priceMkd: "6800 ден", priceEur: "110 €" },
+      { nameMk: "Богданци", nameEn: "Bogdanci", priceMkd: "5300 ден", priceEur: "86 €" },
+      { nameMk: "Валандово", nameEn: "Valandovo", priceMkd: "5000 ден", priceEur: "81 €" },
+      { nameMk: "Велес", nameEn: "Veles", priceMkd: "4000 ден", priceEur: "65 €" },
+      { nameMk: "Виница", nameEn: "Vinica", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Гевгелија", nameEn: "Gevgelija", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Гостивар", nameEn: "Gostivar", priceMkd: "4200 ден", priceEur: "68 €" },
+      { nameMk: "Дебар", nameEn: "Debar", priceMkd: "4700 ден", priceEur: "76 €" },
+      { nameMk: "Делчево", nameEn: "Delcevo", priceMkd: "6800 ден", priceEur: "110 €" },
+      { nameMk: "Демир Капија", nameEn: "Demir Kapija", priceMkd: "4000 ден", priceEur: "65 €" },
+      { nameMk: "Демир Хисар", nameEn: "Demir Hisar", priceMkd: "900 ден", priceEur: "15 €" },
+      { nameMk: "Дојран", nameEn: "Dojran", priceMkd: "5700 ден", priceEur: "93 €" },
+      { nameMk: "Кавадарци", nameEn: "Kavadarci", priceMkd: "3200 ден", priceEur: "52 €" },
+      { nameMk: "Кичево", nameEn: "Kicevo", priceMkd: "3000 ден", priceEur: "49 €" },
+      { nameMk: "Кочани", nameEn: "Kocani", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Кратово", nameEn: "Kratovo", priceMkd: "6300 ден", priceEur: "102 €" },
+      { nameMk: "Крива Паланка", nameEn: "Kriva Palanka", priceMkd: "6800 ден", priceEur: "110 €" },
+      { nameMk: "Крушево", nameEn: "Krusevo", priceMkd: "2000 ден", priceEur: "32 €" },
+      { nameMk: "Куманово", nameEn: "Kumanovo", priceMkd: "6000 ден", priceEur: "97 €" },
+      { nameMk: "Македонска Каменица", nameEn: "Makedonska Kamenica", priceMkd: "6300 ден", priceEur: "102 €" },
+      { nameMk: "Македонски Брод", nameEn: "Makedonski Brod", priceMkd: "3000 ден", priceEur: "49 €" },
+      { nameMk: "Неготино", nameEn: "Negotino", priceMkd: "3500 ден", priceEur: "57 €" },
+      { nameMk: "Охрид", nameEn: "Ohrid", priceMkd: "2800 ден", priceEur: "45 €" },
+      { nameMk: "Пехчево", nameEn: "Pehcevo", priceMkd: "6800 ден", priceEur: "110 €" },
+      { nameMk: "Прилеп", nameEn: "Prilep", priceMkd: "1400 ден", priceEur: "23 €" },
+      { nameMk: "Пробиштип", nameEn: "Probistip", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Радовиш", nameEn: "Radovis", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Ресен", nameEn: "Resen", priceMkd: "1300 ден", priceEur: "21 €" },
+      { nameMk: "Свети Николе", nameEn: "Sveti Nikole", priceMkd: "4800 ден", priceEur: "78 €" },
+      { nameMk: "Скопје", nameEn: "Skopje", priceMkd: "6300 ден", priceEur: "102 €" },
+      { nameMk: "Струга", nameEn: "Struga", priceMkd: "3300 ден", priceEur: "54 €" },
+      { nameMk: "Струмица", nameEn: "Strumica", priceMkd: "5800 ден", priceEur: "94 €" },
+      { nameMk: "Тетово", nameEn: "Tetovo", priceMkd: "5000 ден", priceEur: "81 €" },
+      { nameMk: "Штип", nameEn: "Stip", priceMkd: "4800 ден", priceEur: "78 €" },
     ],
   },
 ];
 
 export default function DestinationsPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("airports");
   const [searchTerm, setSearchTerm] = useState("");
 
   const activeData = destinationCategories.find((c) => c.id === activeCategory);
   
+  const getDestinationName = (dest: Destination) => {
+    return language === "mk" ? dest.nameMk : dest.nameEn;
+  };
+  
   const filteredDestinations = activeData?.destinations.filter((d) =>
-    d.name.toLowerCase().includes(searchTerm.toLowerCase())
+    getDestinationName(d).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -326,20 +345,20 @@ export default function DestinationsPage() {
                 <tbody className="divide-y divide-border">
                   {filteredDestinations?.map((dest, index) => (
                     <motion.tr
-                      key={dest.name}
+                      key={dest.nameMk}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.02 }}
                       className="hover:bg-secondary/30 transition-colors"
                     >
-                      <td className="px-6 py-4 text-foreground font-medium">{dest.name}</td>
+                      <td className="px-6 py-4 text-foreground font-medium">{getDestinationName(dest)}</td>
                       <td className="px-6 py-4 text-right">
                         {activeData?.isForeign ? (
                           <span className="text-primary font-semibold">{dest.priceEur}</span>
                         ) : (
                           <div className="flex flex-col items-end gap-1">
-                            {"priceMkd" in dest && dest.priceMkd && (
-                              <span className="text-primary font-semibold">{String(dest.priceMkd)}</span>
+                            {dest.priceMkd && (
+                              <span className="text-primary font-semibold">{dest.priceMkd}</span>
                             )}
                             <span className="text-muted-foreground text-sm">{dest.priceEur}</span>
                           </div>
