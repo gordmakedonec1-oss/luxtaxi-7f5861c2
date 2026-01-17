@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Star, Send, Loader2, User, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Review {
   id: string;
@@ -15,6 +16,7 @@ interface Review {
 }
 
 export default function ReviewsPage() {
+  const { t, language } = useLanguage();
   const { toast } = useToast();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,8 +55,8 @@ export default function ReviewsPage() {
 
     if (!formData.comment.trim()) {
       toast({
-        title: "Грешка",
-        description: "Ве молиме напишете коментар.",
+        title: t("reviewsPage.errorTitle"),
+        description: t("reviewsPage.errorComment"),
         variant: "destructive",
       });
       return;
@@ -62,8 +64,8 @@ export default function ReviewsPage() {
 
     if (!formData.isAnonymous && !formData.name.trim()) {
       toast({
-        title: "Грешка",
-        description: "Ве молиме внесете име или изберете анонимно.",
+        title: t("reviewsPage.errorTitle"),
+        description: t("reviewsPage.errorName"),
         variant: "destructive",
       });
       return;
@@ -83,8 +85,8 @@ export default function ReviewsPage() {
       if (error) throw error;
 
       toast({
-        title: "Благодариме!",
-        description: "Вашата оцена е примена и ќе биде објавена по одобрување.",
+        title: t("reviewsPage.successTitle"),
+        description: t("reviewsPage.successMessage"),
       });
 
       setFormData({
@@ -97,8 +99,8 @@ export default function ReviewsPage() {
     } catch (error: any) {
       console.error("Error submitting review:", error);
       toast({
-        title: "Грешка",
-        description: "Обидете се повторно.",
+        title: t("reviewsPage.errorTitle"),
+        description: t("reviewsPage.errorMessage"),
         variant: "destructive",
       });
     } finally {
@@ -129,12 +131,101 @@ export default function ReviewsPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("mk-MK", {
+    return new Date(dateString).toLocaleDateString(language === "mk" ? "mk-MK" : "en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
   };
+
+  // Sample reviews data with translations
+  const sampleReviews = language === "mk" ? [
+    {
+      id: "1",
+      name: "Марко",
+      rating: 5,
+      comment: "Врв сервис, возачот беше супер коректен. Ме зеде на време од аеродром и ме донесе дома без никакви проблеми. Препорачувам!",
+      date: "15 јануари 2026",
+    },
+    {
+      id: "2",
+      name: "Ана",
+      rating: 5,
+      comment: "Најдобар такси што сум го користела за до Солун. Чисто возило, пријатен возач, и цената беше коректна. Дефинитивно ќе ги викам повторно.",
+      date: "12 јануари 2026",
+    },
+    {
+      id: "3",
+      name: "Дејан",
+      rating: 5,
+      comment: "Ги користам веќе трет пат и секогаш се задоволен. За аеродром Скопје секогаш на време, возилото е удобно. Одлична услуга!",
+      date: "8 јануари 2026",
+    },
+    {
+      id: "4",
+      name: "Елена",
+      rating: 5,
+      comment: "Патувавме до Охрид за викенд. Возачот беше мошне љубезен, ни помогна со куферите. Цената беше договорена однапред, без изненадувања.",
+      date: "5 јануари 2026",
+    },
+    {
+      id: "5",
+      name: "Горан",
+      rating: 5,
+      comment: "Брза резервација преку Viber, веднаш добив потврда. Возилото дојде точно на време. Ќе ги препорачам на сите!",
+      date: "2 јануари 2026",
+    },
+    {
+      id: "6",
+      name: "Ивана",
+      rating: 5,
+      comment: "Одлично искуство! Патував до Белград со нив, патот помина многу брзо. Имаше WiFi во возилото, возачот беше професионален.",
+      date: "28 декември 2025",
+    },
+  ] : [
+    {
+      id: "1",
+      name: "Marco",
+      rating: 5,
+      comment: "Top service, the driver was very professional. He picked me up on time from the airport and brought me home without any issues. Highly recommend!",
+      date: "January 15, 2026",
+    },
+    {
+      id: "2",
+      name: "Ana",
+      rating: 5,
+      comment: "Best taxi I've used to Thessaloniki. Clean vehicle, pleasant driver, and the price was fair. Will definitely call them again.",
+      date: "January 12, 2026",
+    },
+    {
+      id: "3",
+      name: "David",
+      rating: 5,
+      comment: "I've used them three times now and I'm always satisfied. Always on time for Skopje airport, the vehicle is comfortable. Excellent service!",
+      date: "January 8, 2026",
+    },
+    {
+      id: "4",
+      name: "Elena",
+      rating: 5,
+      comment: "We traveled to Ohrid for the weekend. The driver was very kind and helped us with the luggage. Price was agreed in advance, no surprises.",
+      date: "January 5, 2026",
+    },
+    {
+      id: "5",
+      name: "George",
+      rating: 5,
+      comment: "Quick booking via Viber, immediately got confirmation. The vehicle arrived right on time. Will recommend to everyone!",
+      date: "January 2, 2026",
+    },
+    {
+      id: "6",
+      name: "Ivana",
+      rating: 5,
+      comment: "Excellent experience! Traveled to Belgrade with them, the trip went by quickly. There was WiFi in the vehicle, the driver was professional.",
+      date: "December 28, 2025",
+    },
+  ];
 
   return (
     <Layout>
@@ -147,14 +238,14 @@ export default function ReviewsPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Рецензии
+              {t("reviewsPage.label")}
             </span>
             <h1 className="luxury-heading text-foreground mb-6">
-              Што велат нашите <span className="gold-gradient-text">клиенти</span>
+              {t("reviewsPage.title")} <span className="gold-gradient-text">{t("reviewsPage.titleHighlight")}</span>
             </h1>
             <div className="divider-gold mb-6" />
             <p className="luxury-subheading max-w-2xl mx-auto">
-              Прочитајте искуства од задоволни патници или споделете го вашето
+              {t("reviewsPage.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -171,7 +262,7 @@ export default function ReviewsPage() {
               className="luxury-card p-8"
             >
               <h2 className="text-2xl font-serif font-semibold text-foreground mb-6">
-                Оставете ваша оцена
+                {t("reviewsPage.formTitle")}
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -187,7 +278,7 @@ export default function ReviewsPage() {
                     className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
                   />
                   <label htmlFor="anonymous" className="text-muted-foreground">
-                    Анонимно
+                    {t("reviewsPage.anonymous")}
                   </label>
                 </div>
 
@@ -196,7 +287,7 @@ export default function ReviewsPage() {
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
                         <User className="w-4 h-4 inline mr-1" />
-                        Име *
+                        {t("reviewsPage.nameLabel")}
                       </label>
                       <input
                         type="text"
@@ -205,13 +296,13 @@ export default function ReviewsPage() {
                           setFormData({ ...formData, name: e.target.value })
                         }
                         className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder="Вашето име"
+                        placeholder={t("reviewsPage.namePlaceholder")}
                       />
                     </div>
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
                         <Mail className="w-4 h-4 inline mr-1" />
-                        Е-маил (опционално)
+                        {t("reviewsPage.emailLabel")}
                       </label>
                       <input
                         type="email"
@@ -220,7 +311,7 @@ export default function ReviewsPage() {
                           setFormData({ ...formData, email: e.target.value })
                         }
                         className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder="vash@email.com"
+                        placeholder={t("reviewsPage.emailPlaceholder")}
                       />
                     </div>
                   </div>
@@ -228,7 +319,7 @@ export default function ReviewsPage() {
 
                 {/* Rating */}
                 <div>
-                  <label className="text-sm text-muted-foreground mb-2 block">Оцена</label>
+                  <label className="text-sm text-muted-foreground mb-2 block">{t("reviewsPage.ratingLabel")}</label>
                   {renderStars(formData.rating, true, (rating) =>
                     setFormData({ ...formData, rating })
                   )}
@@ -236,7 +327,7 @@ export default function ReviewsPage() {
 
                 {/* Comment */}
                 <div>
-                  <label className="text-sm text-muted-foreground mb-2 block">Коментар *</label>
+                  <label className="text-sm text-muted-foreground mb-2 block">{t("reviewsPage.commentLabel")}</label>
                   <textarea
                     value={formData.comment}
                     onChange={(e) =>
@@ -244,7 +335,7 @@ export default function ReviewsPage() {
                     }
                     rows={4}
                     className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                    placeholder="Споделете го вашето искуство..."
+                    placeholder={t("reviewsPage.commentPlaceholder")}
                   />
                 </div>
 
@@ -258,18 +349,18 @@ export default function ReviewsPage() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                      Се испраќа...
+                      {t("reviewsPage.submitting")}
                     </>
                   ) : (
                     <>
                       <Send className="w-5 h-5 mr-2" />
-                      Испрати оцена
+                      {t("reviewsPage.submitButton")}
                     </>
                   )}
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  * Секоја оцена се одобрува пред да биде објавена.
+                  {t("reviewsPage.approvalNote")}
                 </p>
               </form>
             </motion.div>
@@ -281,51 +372,7 @@ export default function ReviewsPage() {
       <section className="section-padding bg-secondary/30">
         <div className="container-luxury">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Hardcoded sample reviews */}
-            {[
-              {
-                id: "1",
-                name: "Марко",
-                rating: 5,
-                comment: "Врв сервис, возачот беше супер коректен. Ме зеде на време од аеродром и ме донесе дома без никакви проблеми. Препорачувам!",
-                date: "15 јануари 2026",
-              },
-              {
-                id: "2",
-                name: "Ана",
-                rating: 5,
-                comment: "Најдобар такси што сум го користела за до Солун. Чисто возило, пријатен возач, и цената беше коректна. Дефинитивно ќе ги викам повторно.",
-                date: "12 јануари 2026",
-              },
-              {
-                id: "3",
-                name: "Дејан",
-                rating: 5,
-                comment: "Ги користам веќе трет пат и секогаш се задоволен. За аеродром Скопје секогаш на време, возилото е удобно. Одлична услуга!",
-                date: "8 јануари 2026",
-              },
-              {
-                id: "4",
-                name: "Елена",
-                rating: 5,
-                comment: "Патувавме до Охрид за викенд. Возачот беше мошне љубезен, ни помогна со куферите. Цената беше договорена однапред, без изненадувања.",
-                date: "5 јануари 2026",
-              },
-              {
-                id: "5",
-                name: "Горан",
-                rating: 5,
-                comment: "Брза резервација преку Viber, веднаш добив потврда. Возилото дојде точно на време. Ќе ги препорачам на сите!",
-                date: "2 јануари 2026",
-              },
-              {
-                id: "6",
-                name: "Ивана",
-                rating: 5,
-                comment: "Одлично искуство! Патував до Белград со нив, патот помина многу брзо. Имаше WiFi во возилото, возачот беше професионален.",
-                date: "28 декември 2025",
-              },
-            ].map((review, index) => (
+            {sampleReviews.map((review, index) => (
               <motion.div
                 key={review.id}
                 initial={{ opacity: 0, y: 20 }}
