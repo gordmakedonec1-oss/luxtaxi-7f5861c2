@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Users, Snowflake, Wifi, Briefcase, Check } from "lucide-react";
+import { Users, Snowflake, Wifi, Briefcase, Armchair } from "lucide-react";
 import passat1 from "@/assets/passat-1.jpg";
 import passat2 from "@/assets/passat-2.jpg";
 import passat3 from "@/assets/passat-3.jpg";
@@ -11,30 +11,25 @@ const vehicles = [
   {
     image: passat1,
     name: "Volkswagen Passat",
-    subtitle: "Бизнис Класа",
     description: "Елегантен и моќен, идеален за бизнис патувања и аеродромски трансфери.",
-    features: ["4 патници", "Автоматик", "Клима", "WiFi", "Кожни седишта", "USB полнач"],
   },
   {
     image: passat2,
     name: "Volkswagen Passat",
-    subtitle: "Комфорт Класа",
     description: "Луксузен кожен ентериер со клима, грејачи и најсовремена технологија.",
-    features: ["4 патници", "Греење седишта", "Клима", "Аудио систем", "LED осветлување", "Амбиент"],
   },
   {
     image: passat3,
     name: "Volkswagen Passat",
-    subtitle: "Тура Класа",
     description: "Комфорно и безбедно патување низ прекрасните балкански предели.",
-    features: ["4 патници", "Навигација", "Климатроник", "Панорама", "Багажник", "Комфорни седишта"],
   },
 ];
 
 const allFeatures = [
-  { icon: Users, label: "Капацитет: 4 патници" },
-  { icon: Snowflake, label: "Клима контрола" },
-  { icon: Wifi, label: "Бесплатен WiFi" },
+  { icon: Users, label: "4 патници" },
+  { icon: Snowflake, label: "Климатроник" },
+  { icon: Wifi, label: "Wireless" },
+  { icon: Armchair, label: "Комфорни седишта" },
   { icon: Briefcase, label: "Голем багажник" },
 ];
 
@@ -98,22 +93,10 @@ export default function FleetPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <p className="text-primary text-sm font-medium mb-2">{vehicle.subtitle}</p>
                   <h3 className="text-xl font-serif font-semibold text-foreground mb-3">
                     {vehicle.name}
                   </h3>
-                  <p className="text-muted-foreground mb-4">{vehicle.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {vehicle.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className="inline-flex items-center gap-1 text-xs px-3 py-1 bg-secondary rounded-full text-foreground"
-                      >
-                        <Check className="w-3 h-3 text-primary" />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-muted-foreground">{vehicle.description}</p>
                 </div>
               </motion.div>
             ))}

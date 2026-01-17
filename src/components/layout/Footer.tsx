@@ -35,6 +35,9 @@ export function Footer() {
               <Link to="/destinations" className="text-muted-foreground hover:text-primary transition-colors">
                 Дестинации
               </Link>
+              <Link to="/reviews" className="text-muted-foreground hover:text-primary transition-colors">
+                Рецензии
+              </Link>
               <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
                 За Нас
               </Link>
