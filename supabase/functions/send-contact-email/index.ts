@@ -18,6 +18,65 @@ interface ContactEmailRequest {
   message: string;
 }
 
+// Input validation function
+function validateInput(data: ContactEmailRequest): string | null {
+  // Validate name
+  const name = data.name?.trim();
+  if (!name || name.length < 2 || name.length > 100) {
+    return "Name must be 2-100 characters";
+  }
+
+  // Validate email format if provided
+  if (data.email) {
+    const email = data.email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return "Invalid email format";
+    }
+    if (email.length > 255) {
+      return "Email must be less than 255 characters";
+    }
+  }
+
+  // Validate phone if provided
+  if (data.phone) {
+    const phone = data.phone.trim();
+    const phoneRegex = /^\+?[0-9\s\-()]{6,20}$/;
+    if (!phoneRegex.test(phone)) {
+      return "Invalid phone format";
+    }
+  }
+
+  // Validate message
+  const message = data.message?.trim();
+  if (!message || message.length < 10 || message.length > 2000) {
+    return "Message must be 10-2000 characters";
+  }
+
+  // Validate destination if provided
+  if (data.destination && data.destination.length > 200) {
+    return "Destination must be less than 200 characters";
+  }
+
+  // Validate date if provided
+  if (data.date && data.date.length > 50) {
+    return "Date must be less than 50 characters";
+  }
+
+  return null;
+}
+
+// Simple HTML escaping for safe email content
+function escapeHtml(text: string): string {
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -25,21 +84,30 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, phone, destination, date, message }: ContactEmailRequest = await req.json();
+    const requestData: ContactEmailRequest = await req.json();
 
-    console.log("Received contact form submission:", { name, email, phone, destination, date });
-
-    // Validate required fields
-    if (!name || !email || !message) {
-      console.error("Missing required fields");
+    // Validate input
+    const validationError = validateInput(requestData);
+    if (validationError) {
+      console.warn("Validation failed:", validationError);
       return new Response(
-        JSON.stringify({ error: "Name, email, and message are required" }),
+        JSON.stringify({ error: validationError }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         }
       );
     }
+
+    // Sanitize inputs
+    const name = escapeHtml(requestData.name.trim());
+    const email = escapeHtml(requestData.email?.trim() || "");
+    const phone = escapeHtml(requestData.phone?.trim() || "");
+    const destination = escapeHtml(requestData.destination?.trim() || "");
+    const date = escapeHtml(requestData.date?.trim() || "");
+    const message = escapeHtml(requestData.message.trim());
+
+    console.log("Processing contact form submission from:", name);
 
     // Send notification email to admin
     const emailResponse = await resend.emails.send({
@@ -55,7 +123,7 @@ const handler = async (req: Request): Promise<Response> => {
           </tr>
           <tr>
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Email:</td>
-            <td style="padding: 10px; border: 1px solid #ddd;">${email}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">${email || "Не е внесен"}</td>
           </tr>
           <tr>
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Телефон:</td>
@@ -78,7 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    console.log("Email sent successfully");
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -86,8 +154,12 @@ const handler = async (req: Request): Promise<Response> => {
     });
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
+    
+    // Return generic error message to prevent information leakage
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        error: "Се случи грешка при испраќање на пораката. Ве молиме обидете се повторно или контактирајте не директно." 
+      }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
