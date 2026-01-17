@@ -41,7 +41,7 @@ export function CTA() {
           </div>
 
           <p className="text-muted-foreground mt-8">
-            <span className="text-primary font-semibold">+389 70 123 456</span> • Достапни 24/7
+            <span className="text-primary font-semibold">+389 75 269 459</span> • Достапни 24/7
           </p>
         </motion.div>
       </div>
