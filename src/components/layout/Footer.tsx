@@ -26,11 +26,21 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-serif font-semibold text-foreground mb-6">Навигација</h4>
             <nav className="flex flex-col gap-3">
-              <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">Услуги</Link>
-              <Link to="/fleet" className="text-muted-foreground hover:text-primary transition-colors">Возен Парк</Link>
-              <Link to="/destinations" className="text-muted-foreground hover:text-primary transition-colors">Дестинации</Link>
-              <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">За Нас</Link>
-              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">Контакт</Link>
+              <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                Услуги
+              </Link>
+              <Link to="/fleet" className="text-muted-foreground hover:text-primary transition-colors">
+                Возен Парк
+              </Link>
+              <Link to="/destinations" className="text-muted-foreground hover:text-primary transition-colors">
+                Дестинации
+              </Link>
+              <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                За Нас
+              </Link>
+              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                Контакт
+              </Link>
             </nav>
           </div>
 
@@ -38,11 +48,17 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-serif font-semibold text-foreground mb-6">Контакт</h4>
             <div className="flex flex-col gap-4">
-              <a href="tel:+38970123456" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="tel:+38970123456"
+                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Phone className="w-5 h-5 text-primary" />
-                <span>+389 70 123 456</span>
+                <span>+389 75 269 459</span>
               </a>
-              <a href="mailto:info@luxtaxi.mk" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="mailto:info@luxtaxi.mk"
+                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Mail className="w-5 h-5 text-primary" />
                 <span>info@luxtaxi.mk</span>
               </a>
@@ -74,9 +90,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground mt-6">
-              Чекање: 1 час = 400 ден.
-            </p>
+            <p className="text-sm text-muted-foreground mt-6">Чекање: 1 час = 400 ден.</p>
           </div>
         </div>
       </div>
@@ -84,12 +98,8 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-border py-6">
         <div className="container-luxury flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2024 LuxTaxi Македонија. Сите права задржани.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Луксузен превоз од Битола до сите дестинации
-          </p>
+          <p className="text-sm text-muted-foreground">© 2024 LuxTaxi Македонија. Сите права задржани.</p>
+          <p className="text-sm text-muted-foreground">Луксузен превоз од Битола до сите дестинации</p>
         </div>
       </div>
     </footer>

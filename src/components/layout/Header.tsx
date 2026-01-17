@@ -33,9 +33,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-lg border-b border-border/50 py-3"
-          : "bg-transparent py-5"
+        isScrolled ? "bg-background/95 backdrop-blur-lg border-b border-border/50 py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="container-luxury flex items-center justify-between">
@@ -67,9 +65,12 @@ export function Header() {
 
         {/* CTA Button */}
         <div className="hidden lg:flex items-center gap-4">
-          <a href="tel:+38970123456" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+          <a
+            href="tel:+38970123456"
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
             <Phone className="w-4 h-4" />
-            <span>+389 70 123 456</span>
+            <span>+389 75 269 459</span>
           </a>
           <Button variant="gold" size="lg" asChild>
             <Link to="/contact">Резервирај</Link>
@@ -77,10 +78,7 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden text-foreground p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
+        <button className="lg:hidden text-foreground p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
