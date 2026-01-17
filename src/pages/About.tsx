@@ -2,40 +2,43 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Award, Users, MapPin, Clock, Shield, Heart } from "lucide-react";
+import { Award, Clock, Shield, Heart } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const stats = [
-  { value: "10+", label: "Години искуство" },
-  { value: "5000+", label: "Задоволни клиенти" },
-  { value: "50+", label: "Дестинации" },
-  { value: "24/7", label: "Достапност" },
-];
-
-const values = [
-  {
-    icon: Shield,
-    title: "Безбедност",
-    description: "Безбедноста на нашите патници е наш приоритет. Лиценцирани возила со редовен сервис.",
-  },
-  {
-    icon: Clock,
-    title: "Точност",
-    description: "Секогаш сме навреме. Го следиме вашиот лет и се прилагодуваме на вашите потреби.",
-  },
-  {
-    icon: Award,
-    title: "Професионалност",
-    description: "Нашите шофери се обучени за врвна услуга и дискреција. Секој детал е важен.",
-  },
-  {
-    icon: Heart,
-    title: "Посветеност",
-    description: "Секој клиент е важен. Се грижиме за вашето комфорно и пријатно патување.",
-  },
-];
-
 export default function AboutPage() {
+  const { t } = useLanguage();
+
+  const stats = [
+    { value: "10+", labelKey: "aboutPage.stat1" },
+    { value: "5000+", labelKey: "aboutPage.stat2" },
+    { value: "50+", labelKey: "aboutPage.stat3" },
+    { value: "24/7", labelKey: "aboutPage.stat4" },
+  ];
+
+  const values = [
+    {
+      icon: Shield,
+      titleKey: "aboutPage.safety.title",
+      descriptionKey: "aboutPage.safety.description",
+    },
+    {
+      icon: Clock,
+      titleKey: "aboutPage.punctuality.title",
+      descriptionKey: "aboutPage.punctuality.description",
+    },
+    {
+      icon: Award,
+      titleKey: "aboutPage.professionalism.title",
+      descriptionKey: "aboutPage.professionalism.description",
+    },
+    {
+      icon: Heart,
+      titleKey: "aboutPage.dedication.title",
+      descriptionKey: "aboutPage.dedication.description",
+    },
+  ];
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -51,14 +54,14 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              За Нас
+              {t("aboutPage.label")}
             </span>
             <h1 className="luxury-heading text-foreground mb-6">
-              Луксузен Такси <span className="gold-gradient-text">Превоз</span>
+              {t("aboutPage.title")} <span className="gold-gradient-text">{t("aboutPage.titleHighlight")}</span>
             </h1>
             <div className="divider-gold mb-6" />
             <p className="luxury-subheading max-w-3xl mx-auto">
-              Симбол на елеганција, сигурност и врвна услуга во премиум превозот низ Балканот
+              {t("aboutPage.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -70,7 +73,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
-                key={stat.label}
+                key={stat.labelKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -80,7 +83,7 @@ export default function AboutPage() {
                 <p className="text-4xl md:text-5xl font-serif font-bold text-primary mb-2">
                   {stat.value}
                 </p>
-                <p className="text-muted-foreground">{stat.label}</p>
+                <p className="text-muted-foreground">{t(stat.labelKey)}</p>
               </motion.div>
             ))}
           </div>
@@ -98,7 +101,7 @@ export default function AboutPage() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-serif font-semibold text-foreground mb-6">
-                Добредојдовте во <span className="gold-gradient-text">LuxTaxi Македонија</span>
+                {t("aboutPage.welcomeTitle")} <span className="gold-gradient-text">{t("aboutPage.welcomeTitleHighlight")}</span>
               </h2>
             </motion.div>
 
@@ -109,17 +112,13 @@ export default function AboutPage() {
               className="prose prose-lg prose-invert max-w-none text-center"
             >
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Нашите модерни возила и професионални шофери овозможуваат незаборавно и безбедно патување, 
-                без разлика дали патувате кон аеродром, деловен состанок или вашата омилена туристичка дестинација.
+                {t("aboutPage.welcomeText1")}
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Од ВИП аеродромски трансфери, преку приватен превоз за деловни и дипломатски клиенти, 
-                до луксузни тури низ балканските метрополи – секое патување со нас е искуство на класа, 
-                прецизност и стил.
+                {t("aboutPage.welcomeText2")}
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Со седиште во Битола, ги покриваме сите дестинации низ Македонија и Балканот. 
-                Нашата мисија е да обезбедиме врвен комфорт и сигурност за секој патник.
+                {t("aboutPage.welcomeText3")}
               </p>
             </motion.div>
           </div>
@@ -136,10 +135,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Наши Вредности
+              {t("aboutPage.valuesLabel")}
             </span>
             <h2 className="luxury-heading text-foreground mb-6">
-              Што нè <span className="gold-gradient-text">издвојува</span>
+              {t("aboutPage.valuesTitle")} <span className="gold-gradient-text">{t("aboutPage.valuesTitleHighlight")}</span>
             </h2>
             <div className="divider-gold" />
           </motion.div>
@@ -147,7 +146,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
-                key={value.title}
+                key={value.titleKey}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -158,9 +157,9 @@ export default function AboutPage() {
                   <value.icon className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-serif font-semibold text-foreground mb-3">
-                  {value.title}
+                  {t(value.titleKey)}
                 </h3>
-                <p className="text-muted-foreground">{value.description}</p>
+                <p className="text-muted-foreground">{t(value.descriptionKey)}</p>
               </motion.div>
             ))}
           </div>
@@ -176,13 +175,13 @@ export default function AboutPage() {
             viewport={{ once: true }}
           >
             <h2 className="luxury-heading text-foreground mb-6">
-              Започнете го патувањето <span className="gold-gradient-text">денес</span>
+              {t("aboutPage.cta.title")} <span className="gold-gradient-text">{t("aboutPage.cta.titleHighlight")}</span>
             </h2>
             <p className="luxury-subheading mb-8 max-w-xl mx-auto">
-              Контактирајте нè за резервација или понуда
+              {t("aboutPage.cta.subtitle")}
             </p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Контакт</Link>
+              <Link to="/contact">{t("aboutPage.cta.button")}</Link>
             </Button>
           </motion.div>
         </div>

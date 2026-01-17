@@ -3,37 +3,40 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Users, Snowflake, Wifi, Briefcase, Armchair } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import passat1 from "@/assets/passat-1.jpg";
 import passat2 from "@/assets/passat-2.jpg";
 import passat3 from "@/assets/passat-3.jpg";
 
-const vehicles = [
-  {
-    image: passat1,
-    name: "Volkswagen Passat",
-    description: "Елегантен и моќен, идеален за бизнис патувања и аеродромски трансфери.",
-  },
-  {
-    image: passat2,
-    name: "Volkswagen Passat",
-    description: "Луксузен кожен ентериер со клима, грејачи и најсовремена технологија.",
-  },
-  {
-    image: passat3,
-    name: "Volkswagen Passat",
-    description: "Комфорно и безбедно патување низ прекрасните балкански предели.",
-  },
-];
-
-const allFeatures = [
-  { icon: Users, label: "4 патници" },
-  { icon: Snowflake, label: "Климатроник" },
-  { icon: Wifi, label: "Wireless" },
-  { icon: Armchair, label: "Комфорни седишта" },
-  { icon: Briefcase, label: "Голем багажник" },
-];
-
 export default function FleetPage() {
+  const { t } = useLanguage();
+
+  const vehicles = [
+    {
+      image: passat1,
+      name: "Volkswagen Passat",
+      descriptionKey: "fleetPage.vehicle1.description",
+    },
+    {
+      image: passat2,
+      name: "Volkswagen Passat",
+      descriptionKey: "fleetPage.vehicle2.description",
+    },
+    {
+      image: passat3,
+      name: "Volkswagen Passat",
+      descriptionKey: "fleetPage.vehicle3.description",
+    },
+  ];
+
+  const allFeatures = [
+    { icon: Users, labelKey: "fleetPage.passengers" },
+    { icon: Snowflake, labelKey: "fleetPage.climate" },
+    { icon: Wifi, labelKey: "fleetPage.wireless" },
+    { icon: Armchair, labelKey: "fleetPage.seats" },
+    { icon: Briefcase, labelKey: "fleetPage.luggage" },
+  ];
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -45,14 +48,14 @@ export default function FleetPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Возен Парк
+              {t("fleetPage.label")}
             </span>
             <h1 className="luxury-heading text-foreground mb-6">
-              Нашите <span className="gold-gradient-text">Возила</span>
+              {t("fleetPage.title")} <span className="gold-gradient-text">{t("fleetPage.titleHighlight")}</span>
             </h1>
             <div className="divider-gold mb-6" />
             <p className="luxury-subheading max-w-2xl mx-auto">
-              Модерни Volkswagen Passat возила, опремени со сè што ви треба за комфорно патување
+              {t("fleetPage.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -63,9 +66,9 @@ export default function FleetPage() {
         <div className="container-luxury">
           <div className="flex flex-wrap justify-center gap-8">
             {allFeatures.map((feature) => (
-              <div key={feature.label} className="flex items-center gap-3">
+              <div key={feature.labelKey} className="flex items-center gap-3">
                 <feature.icon className="w-6 h-6 text-primary" />
-                <span className="text-foreground font-medium">{feature.label}</span>
+                <span className="text-foreground font-medium">{t(feature.labelKey)}</span>
               </div>
             ))}
           </div>
@@ -96,7 +99,7 @@ export default function FleetPage() {
                   <h3 className="text-xl font-serif font-semibold text-foreground mb-3">
                     {vehicle.name}
                   </h3>
-                  <p className="text-muted-foreground">{vehicle.description}</p>
+                  <p className="text-muted-foreground">{t(vehicle.descriptionKey)}</p>
                 </div>
               </motion.div>
             ))}
@@ -113,13 +116,13 @@ export default function FleetPage() {
             viewport={{ once: true }}
           >
             <h2 className="luxury-heading text-foreground mb-6">
-              Резервирајте <span className="gold-gradient-text">денес</span>
+              {t("fleetPage.cta.title")} <span className="gold-gradient-text">{t("fleetPage.cta.titleHighlight")}</span>
             </h2>
             <p className="luxury-subheading mb-8 max-w-xl mx-auto">
-              Изберете го вашето возило и започнете го патувањето со стил
+              {t("fleetPage.cta.subtitle")}
             </p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Резервирај Сега</Link>
+              <Link to="/contact">{t("fleetPage.cta.button")}</Link>
             </Button>
           </motion.div>
         </div>

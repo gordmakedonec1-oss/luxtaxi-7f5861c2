@@ -4,12 +4,13 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Ценовник - сите цени се од Битола до дестинацијата
 const destinationCategories = [
   {
     id: "airports",
-    name: "Аеродроми",
+    nameKey: "destinationsPage.airports",
     icon: Plane,
     isForeign: false,
     destinations: [
@@ -24,7 +25,7 @@ const destinationCategories = [
   },
   {
     id: "borders",
-    name: "Гранични Премини",
+    nameKey: "destinationsPage.borders",
     icon: MapPin,
     isForeign: false,
     destinations: [
@@ -40,7 +41,7 @@ const destinationCategories = [
   },
   {
     id: "greece",
-    name: "Грција",
+    nameKey: "destinationsPage.greece",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -82,7 +83,7 @@ const destinationCategories = [
   },
   {
     id: "serbia",
-    name: "Србија",
+    nameKey: "destinationsPage.serbia",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -98,7 +99,7 @@ const destinationCategories = [
   },
   {
     id: "albania",
-    name: "Албанија",
+    nameKey: "destinationsPage.albania",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -116,7 +117,7 @@ const destinationCategories = [
   },
   {
     id: "bulgaria",
-    name: "Бугарија",
+    nameKey: "destinationsPage.bulgaria",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -131,7 +132,7 @@ const destinationCategories = [
   },
   {
     id: "croatia",
-    name: "Хрватска",
+    nameKey: "destinationsPage.croatia",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -142,7 +143,7 @@ const destinationCategories = [
   },
   {
     id: "montenegro",
-    name: "Црна Гора",
+    nameKey: "destinationsPage.montenegro",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -153,7 +154,7 @@ const destinationCategories = [
   },
   {
     id: "kosovo",
-    name: "Косово",
+    nameKey: "destinationsPage.kosovo",
     icon: MapPin,
     isForeign: true,
     destinations: [
@@ -163,7 +164,7 @@ const destinationCategories = [
   },
   {
     id: "tourist",
-    name: "Туристички Дестинации",
+    nameKey: "destinationsPage.tourist",
     icon: Mountain,
     isForeign: false,
     destinations: [
@@ -184,7 +185,7 @@ const destinationCategories = [
   },
   {
     id: "cities",
-    name: "Градови во Македонија",
+    nameKey: "destinationsPage.cities",
     icon: Building,
     isForeign: false,
     destinations: [
@@ -227,6 +228,7 @@ const destinationCategories = [
 ];
 
 export default function DestinationsPage() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("airports");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -247,20 +249,20 @@ export default function DestinationsPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Дестинации
+              {t("destinationsPage.label")}
             </span>
             <h1 className="luxury-heading text-foreground mb-6">
-              Цени и <span className="gold-gradient-text">Дестинации</span>
+              {t("destinationsPage.title")} <span className="gold-gradient-text">{t("destinationsPage.titleHighlight")}</span>
             </h1>
             <div className="divider-gold mb-6" />
             <p className="luxury-subheading max-w-2xl mx-auto">
-              Сите цени се од Битола до дестинацијата и обратно
+              {t("destinationsPage.subtitle")}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Category Tabs - Fixed position on mobile */}
+      {/* Category Tabs */}
       <section className="py-8 bg-secondary/95">
         <div className="container-luxury">
           <div className="flex flex-wrap justify-center gap-3">
@@ -275,7 +277,7 @@ export default function DestinationsPage() {
                 }`}
               >
                 <category.icon className="w-4 h-4" />
-                {category.name}
+                {t(category.nameKey)}
               </button>
             ))}
           </div>
@@ -291,7 +293,7 @@ export default function DestinationsPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Пребарувај дестинација..."
+                placeholder={t("destinationsPage.searchPlaceholder")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 bg-secondary border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
@@ -310,15 +312,15 @@ export default function DestinationsPage() {
             <div className="p-6 border-b border-border">
               <h2 className="text-2xl font-serif font-semibold text-foreground flex items-center gap-3">
                 {activeData && <activeData.icon className="w-6 h-6 text-primary" />}
-                {activeData?.name}
+                {activeData && t(activeData.nameKey)}
               </h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-secondary/50">
                   <tr>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-foreground">Дестинација</th>
-                    <th className="text-right px-6 py-4 text-sm font-semibold text-foreground">Цена</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-foreground">{t("destinationsPage.destination")}</th>
+                    <th className="text-right px-6 py-4 text-sm font-semibold text-foreground">{t("destinationsPage.price")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -356,20 +358,20 @@ export default function DestinationsPage() {
             <div className="luxury-card p-6">
               <h3 className="text-lg font-serif font-semibold text-foreground mb-4 flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-primary" />
-                Начини на плаќање
+                {t("destinationsPage.paymentMethods")}
               </h3>
               <div className="flex flex-wrap gap-6">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Banknote className="w-5 h-5 text-primary" />
-                  <span>Готовина</span>
+                  <span>{t("destinationsPage.cash")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <CreditCard className="w-5 h-5 text-primary" />
-                  <span>Картица</span>
+                  <span>{t("destinationsPage.card")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <FileText className="w-5 h-5 text-primary" />
-                  <span>Фактура</span>
+                  <span>{t("destinationsPage.invoice")}</span>
                 </div>
               </div>
             </div>
@@ -382,20 +384,14 @@ export default function DestinationsPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-serif font-semibold text-foreground mb-2">
-                    Попуст за авансно плаќање
+                    {t("destinationsPage.discountTitle")}
                   </h3>
                   <p className="text-muted-foreground">
-                    Добијте <span className="text-primary font-semibold">10% до 15% попуст</span> доколку 
-                    платите и резервирате однапред!
+                    {t("destinationsPage.discountText")}
                   </p>
                 </div>
               </div>
             </div>
-
-            {/* Note */}
-            <p className="text-center text-muted-foreground">
-              * Чекање: 1 час = 400 ден. | Сите цени се од Битола до дестинацијата и обратно.
-            </p>
           </div>
         </div>
       </section>
@@ -409,13 +405,13 @@ export default function DestinationsPage() {
             viewport={{ once: true }}
           >
             <h2 className="luxury-heading text-foreground mb-6">
-              Резервирајте го вашето <span className="gold-gradient-text">патување</span>
+              {t("destinationsPage.cta.title")} <span className="gold-gradient-text">{t("destinationsPage.cta.titleHighlight")}</span>
             </h2>
             <p className="luxury-subheading mb-8 max-w-xl mx-auto">
-              Контактирајте нè за точна понуда и резервација
+              {t("destinationsPage.cta.subtitle")}
             </p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Контактирајте Нè</Link>
+              <Link to="/contact">{t("destinationsPage.cta.button")}</Link>
             </Button>
           </motion.div>
         </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Viber icon component
 const ViberIcon = ({ className }: { className?: string }) => (
@@ -20,34 +21,8 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Телефон",
-    value: "+389 75 269 459",
-    href: "tel:+38975269459",
-  },
-  {
-    icon: Mail,
-    label: "Е-маил",
-    value: "info@luxtaxi.mk",
-    href: "mailto:info@luxtaxi.mk",
-  },
-  {
-    icon: MapPin,
-    label: "Локација",
-    value: "Битола, Македонија",
-    href: null,
-  },
-  {
-    icon: Clock,
-    label: "Работно време",
-    value: "24/7 достапност",
-    href: null,
-  },
-];
-
 export default function ContactPage() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -59,13 +34,40 @@ export default function ContactPage() {
     message: "",
   });
 
+  const contactInfo = [
+    {
+      icon: Phone,
+      labelKey: "contactPage.phone",
+      value: "+389 75 269 459",
+      href: "tel:+38975269459",
+    },
+    {
+      icon: Mail,
+      labelKey: "contactPage.email",
+      value: "info@luxtaxi.mk",
+      href: "mailto:info@luxtaxi.mk",
+    },
+    {
+      icon: MapPin,
+      labelKey: "contactPage.location",
+      value: "Битола, Македонија",
+      href: null,
+    },
+    {
+      icon: Clock,
+      labelKey: "contactPage.workingHours",
+      value: t("contactPage.availability"),
+      href: null,
+    },
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name.trim() || !formData.phone.trim()) {
       toast({
-        title: "Грешка",
-        description: "Ве молиме внесете име и телефон.",
+        title: t("reviewsPage.errorTitle"),
+        description: t("contactPage.errorRequired"),
         variant: "destructive",
       });
       return;
@@ -88,8 +90,8 @@ export default function ContactPage() {
       if (error) throw error;
 
       toast({
-        title: "Пораката е испратена!",
-        description: "Ќе ве контактираме наскоро.",
+        title: t("contactPage.successTitle"),
+        description: t("contactPage.successMessage"),
       });
       
       setFormData({
@@ -103,8 +105,8 @@ export default function ContactPage() {
     } catch (error: any) {
       console.error("Error sending message:", error);
       toast({
-        title: "Грешка при испраќање",
-        description: "Обидете се повторно или јавете се директно.",
+        title: t("contactPage.errorTitle"),
+        description: t("contactPage.errorMessage"),
         variant: "destructive",
       });
     } finally {
@@ -125,13 +127,13 @@ export default function ContactPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">Контакт</span>
+            <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">{t("contactPage.label")}</span>
             <h1 className="luxury-heading text-foreground mb-6">
-              Контактирајте <span className="gold-gradient-text">Нè</span>
+              {t("contactPage.title")} <span className="gold-gradient-text">{t("contactPage.titleHighlight")}</span>
             </h1>
             <div className="divider-gold mb-6" />
             <p className="luxury-subheading max-w-2xl mx-auto">
-              Резервирајте превоз или побарајте понуда - достапни сме 24/7
+              {t("contactPage.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -149,17 +151,17 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl font-serif font-semibold text-foreground mb-8">
-                Информации за <span className="gold-gradient-text">контакт</span>
+                {t("contactPage.infoTitle")} <span className="gold-gradient-text">{t("contactPage.infoTitleHighlight")}</span>
               </h2>
 
               <div className="space-y-6 mb-10">
                 {contactInfo.map((info) => (
-                  <div key={info.label} className="flex items-start gap-4">
+                  <div key={info.labelKey} className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-muted-foreground text-sm mb-1">{info.label}</p>
+                      <p className="text-muted-foreground text-sm mb-1">{t(info.labelKey)}</p>
                       {info.href ? (
                         <a
                           href={info.href}
@@ -180,7 +182,7 @@ export default function ContactPage() {
                 <Button variant="gold" size="lg" className="w-full" asChild>
                   <a href="tel:+38975269459" className="flex items-center justify-center gap-2">
                     <Phone className="w-5 h-5" />
-                    Јави се директно
+                    {t("contactPage.callDirect")}
                   </a>
                 </Button>
                 <Button variant="gold-outline" size="lg" className="w-full" asChild>
@@ -189,7 +191,7 @@ export default function ContactPage() {
                     className="flex items-center justify-center gap-2"
                   >
                     <ViberIcon className="w-5 h-5" />
-                    Испрати Viber порака
+                    {t("contactPage.sendViber")}
                   </a>
                 </Button>
                 <Button variant="gold-outline" size="lg" className="w-full" asChild>
@@ -200,14 +202,14 @@ export default function ContactPage() {
                     className="flex items-center justify-center gap-2"
                   >
                     <WhatsAppIcon className="w-5 h-5" />
-                    Испрати WhatsApp порака
+                    {t("contactPage.sendWhatsApp")}
                   </a>
                 </Button>
               </div>
 
               {/* Note */}
               <p className="text-muted-foreground text-sm mt-8">
-                * За итни резервации, препорачуваме телефонски повик.
+                {t("contactPage.urgentNote")}
               </p>
             </motion.div>
 
@@ -219,12 +221,12 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="luxury-card p-8">
-                <h3 className="text-2xl font-serif font-semibold text-foreground mb-6">Испратете барање</h3>
+                <h3 className="text-2xl font-serif font-semibold text-foreground mb-6">{t("contactPage.formTitle")}</h3>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Име и презиме *</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.nameLabel")}</label>
                       <input
                         type="text"
                         name="name"
@@ -232,11 +234,11 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder="Вашето име"
+                        placeholder={t("contactPage.namePlaceholder")}
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Телефон *</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.phoneLabel")}</label>
                       <input
                         type="tel"
                         name="phone"
@@ -244,37 +246,37 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder="+389 7X XXX XXX"
+                        placeholder={t("contactPage.phonePlaceholder")}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-sm text-muted-foreground mb-2 block">Е-маил</label>
+                    <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.emailLabel")}</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                      placeholder="vash@email.com"
+                      placeholder={t("contactPage.emailPlaceholder")}
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Дестинација</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.destinationLabel")}</label>
                       <input
                         type="text"
                         name="destination"
                         value={formData.destination}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder="Каде патувате?"
+                        placeholder={t("contactPage.destinationPlaceholder")}
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Датум</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.dateLabel")}</label>
                       <input
                         type="date"
                         name="date"
@@ -286,14 +288,14 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="text-sm text-muted-foreground mb-2 block">Порака</label>
+                    <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.messageLabel")}</label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
                       className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                      placeholder="Дополнителни информации за вашето патување..."
+                      placeholder={t("contactPage.messagePlaceholder")}
                     />
                   </div>
 
@@ -301,12 +303,12 @@ export default function ContactPage() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        Се испраќа...
+                        {t("contactPage.submitting")}
                       </>
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Испрати барање
+                        {t("contactPage.submitButton")}
                       </>
                     )}
                   </Button>
