@@ -261,7 +261,7 @@ export default function DestinationsPage() {
       </section>
 
       {/* Category Tabs - Fixed position on mobile */}
-      <section className="py-8 bg-secondary/95 sticky top-[72px] z-40">
+      <section className="py-8 bg-secondary/95">
         <div className="container-luxury">
           <div className="flex flex-wrap justify-center gap-3">
             {destinationCategories.map((category) => (
