@@ -3,21 +3,24 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { name: "Почетна", path: "/" },
-  { name: "Услуги", path: "/services" },
-  { name: "Возен Парк", path: "/fleet" },
-  { name: "Дестинации", path: "/destinations" },
-  { name: "Рецензии", path: "/reviews" },
-  { name: "За Нас", path: "/about" },
-  { name: "Контакт", path: "/contact" },
-];
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.services"), path: "/services" },
+    { name: t("nav.fleet"), path: "/fleet" },
+    { name: t("nav.destinations"), path: "/destinations" },
+    { name: t("nav.reviews"), path: "/reviews" },
+    { name: t("nav.about"), path: "/about" },
+    { name: t("nav.contact"), path: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +48,7 @@ export function Header() {
           </div>
           <div className="hidden sm:block">
             <h1 className="text-xl font-serif font-semibold text-foreground">LuxTaxi</h1>
-            <p className="text-xs text-muted-foreground tracking-widest uppercase">Македонија</p>
+            <p className="text-xs text-muted-foreground tracking-widest uppercase">{t("hero.subtitle")}</p>
           </div>
         </Link>
 
@@ -64,24 +67,28 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* Right side: Language Switcher + CTA */}
         <div className="hidden lg:flex items-center gap-4">
+          <LanguageSwitcher />
           <a
-            href="tel:+38970123456"
+            href="tel:+38975269459"
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <Phone className="w-4 h-4" />
             <span>+389 75 269 459</span>
           </a>
           <Button variant="gold" size="lg" asChild>
-            <Link to="/contact">Резервирај</Link>
+            <Link to="/contact">{t("nav.book")}</Link>
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button className="lg:hidden text-foreground p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile: Language Switcher + Menu Button */}
+        <div className="lg:hidden flex items-center gap-3">
+          <LanguageSwitcher />
+          <button className="text-foreground p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -106,7 +113,7 @@ export function Header() {
                 </Link>
               ))}
               <Button variant="gold" size="lg" className="mt-4" asChild>
-                <Link to="/contact">Резервирај Сега</Link>
+                <Link to="/contact">{t("hero.bookNow")}</Link>
               </Button>
             </nav>
           </motion.div>

@@ -2,31 +2,34 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plane, Briefcase, Users, Car } from "lucide-react";
-
-const services = [
-  {
-    icon: Car,
-    title: "ВИП Превоз",
-    description: "Луксузен ВИП превоз од Битола со дискретен и искусен шофер, идеален за клиенти кои очекуваат највисоко ниво на услуга.",
-  },
-  {
-    icon: Briefcase,
-    title: "Корпоративен Транспорт",
-    description: "Обезбедуваме корпоративен транспорт за ИТ компании, странски фирми и деловни партнери. Точност и професионалност.",
-  },
-  {
-    icon: Users,
-    title: "Превоз на Делегации",
-    description: "Транспорт на странски делегации и државни гости со највисоки стандарди за безбедност и репрезентативност.",
-  },
-  {
-    icon: Plane,
-    title: "Аеродромски Трансфери",
-    description: "Сигурен и луксузен аеродромски трансфер од Битола до сите балкански аеродроми. Навремено пристигнување, без стрес.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Services() {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Car,
+      titleKey: "services.vip.title",
+      descriptionKey: "services.vip.description",
+    },
+    {
+      icon: Briefcase,
+      titleKey: "services.corporate.title",
+      descriptionKey: "services.corporate.description",
+    },
+    {
+      icon: Users,
+      titleKey: "services.delegations.title",
+      descriptionKey: "services.delegations.description",
+    },
+    {
+      icon: Plane,
+      titleKey: "services.airport.title",
+      descriptionKey: "services.airport.description",
+    },
+  ];
+
   return (
     <section className="section-padding bg-gradient-to-b from-background to-navy-light">
       <div className="container-luxury">
@@ -39,22 +42,22 @@ export function Services() {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-            Наши Услуги
+            {t("services.label")}
           </span>
           <h2 className="luxury-heading text-foreground mb-6">
-            Премиум <span className="gold-gradient-text">Превоз</span>
+            {t("services.title")} <span className="gold-gradient-text">{t("services.titleHighlight")}</span>
           </h2>
           <div className="divider-gold mb-6" />
           <p className="luxury-subheading max-w-2xl mx-auto">
-            Од аеродромски трансфери до луксузни тури низ балканските метрополи
+            {t("services.subtitle")}
           </p>
         </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <motion.div
-              key={service.title}
+            <motion.article
+              key={service.titleKey}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -63,18 +66,18 @@ export function Services() {
             >
               <div className="flex items-start gap-6">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-8 h-8 text-primary" />
+                  <service.icon className="w-8 h-8 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-xl font-serif font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {service.title}
+                    {t(service.titleKey)}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    {service.description}
+                    {t(service.descriptionKey)}
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
@@ -87,7 +90,7 @@ export function Services() {
           className="text-center mt-12"
         >
           <Button variant="gold-outline" size="lg" asChild>
-            <Link to="/services">Сите Услуги</Link>
+            <Link to="/services">{t("services.allServices")}</Link>
           </Button>
         </motion.div>
       </div>
