@@ -87,6 +87,23 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.location": "Битола, Македонија",
     "footer.availability": "24/7 достапност",
 
+    // Fleet section (home)
+    "fleet.label": "Возен Парк",
+    "fleet.title": "Нашите",
+    "fleet.titleHighlight": "Возила",
+    "fleet.subtitle": "Модерни, удобни и целосно опремени за вашето комфорно патување",
+    "fleet.exterior": "Екстериер",
+    "fleet.interior": "Ентериер",
+    "fleet.onRoad": "На Пат",
+    "fleet.vehicle1.description": "Елегантен и моќен, идеален за бизнис патувања и аеродромски трансфери.",
+    "fleet.vehicle2.description": "Луксузен кожен ентериер со клима, грејачи и најсовремена технологија.",
+    "fleet.vehicle3.description": "Комфорно и безбедно патување низ прекрасните балкански предели.",
+    "fleet.passengers": "4 патници",
+    "fleet.climate": "Клима",
+    "fleet.wifi": "WiFi",
+    "fleet.luggage": "Багаж",
+    "fleet.viewAll": "Целосен Возен Парк",
+
     // Services Page
     "servicesPage.label": "Наши Услуги",
     "servicesPage.title": "Премиум",
@@ -337,6 +354,23 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.luxuryTransport": "Luxury transport from Bitola to all destinations",
     "footer.location": "Bitola, Macedonia",
     "footer.availability": "24/7 availability",
+
+    // Fleet section (home)
+    "fleet.label": "Fleet",
+    "fleet.title": "Our",
+    "fleet.titleHighlight": "Vehicles",
+    "fleet.subtitle": "Modern, comfortable and fully equipped for your comfortable journey",
+    "fleet.exterior": "Exterior",
+    "fleet.interior": "Interior",
+    "fleet.onRoad": "On the Road",
+    "fleet.vehicle1.description": "Elegant and powerful, ideal for business trips and airport transfers.",
+    "fleet.vehicle2.description": "Luxurious leather interior with climate control, heaters and modern technology.",
+    "fleet.vehicle3.description": "Comfortable and safe travel through beautiful Balkan landscapes.",
+    "fleet.passengers": "4 passengers",
+    "fleet.climate": "Climate",
+    "fleet.wifi": "WiFi",
+    "fleet.luggage": "Luggage",
+    "fleet.viewAll": "View Full Fleet",
 
     // Services Page
     "servicesPage.label": "Our Services",

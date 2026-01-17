@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Users, Snowflake, Wifi, Briefcase } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import passat1 from "@/assets/passat-1.jpg";
 import passat2 from "@/assets/passat-2.jpg";
 import passat3 from "@/assets/passat-3.jpg";
@@ -11,31 +12,32 @@ const fleetItems = [
   {
     image: passat1,
     title: "Volkswagen Passat",
-    subtitle: "Екстериер",
-    description: "Елегантен и моќен, идеален за бизнис патувања и аеродромски трансфери.",
+    subtitleKey: "fleet.exterior",
+    descriptionKey: "fleet.vehicle1.description",
   },
   {
     image: passat2,
     title: "Volkswagen Passat",
-    subtitle: "Ентериер",
-    description: "Луксузен кожен ентериер со клима, грејачи и најсовремена технологија.",
+    subtitleKey: "fleet.interior",
+    descriptionKey: "fleet.vehicle2.description",
   },
   {
     image: passat3,
     title: "Volkswagen Passat",
-    subtitle: "На Пат",
-    description: "Комфорно и безбедно патување низ прекрасните балкански предели.",
+    subtitleKey: "fleet.onRoad",
+    descriptionKey: "fleet.vehicle3.description",
   },
 ];
 
 const features = [
-  { icon: Users, label: "4 патници" },
-  { icon: Snowflake, label: "Клима" },
-  { icon: Wifi, label: "WiFi" },
-  { icon: Briefcase, label: "Багаж" },
+  { icon: Users, labelKey: "fleet.passengers" },
+  { icon: Snowflake, labelKey: "fleet.climate" },
+  { icon: Wifi, labelKey: "fleet.wifi" },
+  { icon: Briefcase, labelKey: "fleet.luggage" },
 ];
 
 export function Fleet() {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -58,14 +60,14 @@ export function Fleet() {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-            Возен Парк
+            {t("fleet.label")}
           </span>
           <h2 className="luxury-heading text-foreground mb-6">
-            Нашите <span className="gold-gradient-text">Возила</span>
+            {t("fleet.title")} <span className="gold-gradient-text">{t("fleet.titleHighlight")}</span>
           </h2>
           <div className="divider-gold mb-6" />
           <p className="luxury-subheading max-w-2xl mx-auto">
-            Модерни, удобни и целосно опремени за вашето комфорно патување
+            {t("fleet.subtitle")}
           </p>
         </motion.div>
 
@@ -92,10 +94,10 @@ export function Fleet() {
                     {fleetItems[currentIndex].title}
                   </h3>
                   <p className="text-primary font-medium mb-2">
-                    {fleetItems[currentIndex].subtitle}
+                    {t(fleetItems[currentIndex].subtitleKey)}
                   </p>
                   <p className="text-muted-foreground">
-                    {fleetItems[currentIndex].description}
+                    {t(fleetItems[currentIndex].descriptionKey)}
                   </p>
                 </div>
               </motion.div>
@@ -140,11 +142,11 @@ export function Fleet() {
         >
           {features.map((feature) => (
             <div
-              key={feature.label}
+              key={feature.labelKey}
               className="flex items-center gap-3 px-6 py-3 bg-secondary rounded-full"
             >
               <feature.icon className="w-5 h-5 text-primary" />
-              <span className="text-foreground font-medium">{feature.label}</span>
+              <span className="text-foreground font-medium">{t(feature.labelKey)}</span>
             </div>
           ))}
         </motion.div>
@@ -158,7 +160,7 @@ export function Fleet() {
           className="text-center mt-12"
         >
           <Button variant="gold-outline" size="lg" asChild>
-            <Link to="/fleet">Целосен Возен Парк</Link>
+            <Link to="/fleet">{t("fleet.viewAll")}</Link>
           </Button>
         </motion.div>
       </div>
