@@ -64,7 +64,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <span>Битола, Северна Македонија</span>
+                <span>Битола, Македонија</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Clock className="w-5 h-5 text-primary" />

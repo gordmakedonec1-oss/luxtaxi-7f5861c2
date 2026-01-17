@@ -21,7 +21,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Локација",
-    value: "Битола, Северна Македонија",
+    value: "Битола, Македонија",
     href: null,
   },
   {
@@ -72,14 +72,8 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Контакт
-            </span>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">Контакт</span>
             <h1 className="luxury-heading text-foreground mb-6">
               Контактирајте <span className="gold-gradient-text">Нè</span>
             </h1>
@@ -164,9 +158,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="luxury-card p-8">
-                <h3 className="text-2xl font-serif font-semibold text-foreground mb-6">
-                  Испратете барање
-                </h3>
+                <h3 className="text-2xl font-serif font-semibold text-foreground mb-6">Испратете барање</h3>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
