@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-navy-light border-t border-border">
       <div className="container-luxury section-padding pb-12">
@@ -14,86 +17,88 @@ export function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-serif font-semibold text-foreground">LuxTaxi</h3>
-                <p className="text-xs text-muted-foreground tracking-widest uppercase">Македонија</p>
+                <p className="text-xs text-muted-foreground tracking-widest uppercase">{t("hero.subtitle")}</p>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Премиум такси услуги за туристи, бизнис клиенти и делегации низ Македонија и Балканот.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">Навигација</h4>
-            <nav className="flex flex-col gap-3">
+          <nav aria-label="Footer navigation">
+            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">{t("footer.navigation")}</h4>
+            <div className="flex flex-col gap-3">
               <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                Услуги
+                {t("nav.services")}
               </Link>
               <Link to="/fleet" className="text-muted-foreground hover:text-primary transition-colors">
-                Возен Парк
+                {t("nav.fleet")}
               </Link>
               <Link to="/destinations" className="text-muted-foreground hover:text-primary transition-colors">
-                Дестинации
+                {t("nav.destinations")}
               </Link>
               <Link to="/reviews" className="text-muted-foreground hover:text-primary transition-colors">
-                Рецензии
+                {t("nav.reviews")}
               </Link>
               <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                За Нас
+                {t("nav.about")}
               </Link>
               <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                Контакт
+                {t("nav.contact")}
               </Link>
-            </nav>
-          </div>
+            </div>
+          </nav>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">Контакт</h4>
+          <address className="not-italic">
+            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">{t("footer.contact")}</h4>
             <div className="flex flex-col gap-4">
               <a
-                href="tel:+38970123456"
+                href="tel:+38975269459"
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
-                <Phone className="w-5 h-5 text-primary" />
+                <Phone className="w-5 h-5 text-primary" aria-hidden="true" />
                 <span>+389 75 269 459</span>
               </a>
               <a
                 href="mailto:info@luxtaxi.mk"
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
-                <Mail className="w-5 h-5 text-primary" />
+                <Mail className="w-5 h-5 text-primary" aria-hidden="true" />
                 <span>info@luxtaxi.mk</span>
               </a>
               <div className="flex items-start gap-3 text-muted-foreground">
-                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <span>Битола, Македонија</span>
+                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{t("footer.location")}</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
-                <Clock className="w-5 h-5 text-primary" />
-                <span>24/7 достапност</span>
+                <Clock className="w-5 h-5 text-primary" aria-hidden="true" />
+                <span>{t("footer.availability")}</span>
               </div>
             </div>
-          </div>
+          </address>
 
           {/* Social */}
           <div>
-            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">Следете Нè</h4>
+            <h4 className="text-lg font-serif font-semibold text-foreground mb-6">{t("footer.followUs")}</h4>
             <div className="flex gap-4">
               <a
                 href="#"
                 className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="#"
                 className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground mt-6">Чекање: 1 час = 400 ден.</p>
+            <p className="text-sm text-muted-foreground mt-6">{t("footer.waitingFee")}</p>
           </div>
         </div>
       </div>
@@ -101,8 +106,8 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-border py-6">
         <div className="container-luxury flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">© 2024 LuxTaxi Македонија. Сите права задржани.</p>
-          <p className="text-sm text-muted-foreground">Луксузен превоз од Битола до сите дестинации</p>
+          <p className="text-sm text-muted-foreground">© 2024 LuxTaxi {t("hero.subtitle")}. {t("footer.rights")}</p>
+          <p className="text-sm text-muted-foreground">{t("footer.luxuryTransport")}</p>
         </div>
       </div>
     </footer>

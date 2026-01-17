@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, Star } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src={heroBg}
-          alt="LuxTaxi Македонија"
+          alt="LuxTaxi Битола - Луксузен такси превоз Македонија"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 hero-overlay" />
@@ -33,18 +36,18 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8"
           >
             <Star className="w-4 h-4 text-primary" />
-            <span className="text-sm text-primary font-medium">Премиум ВИП Превоз</span>
+            <span className="text-sm text-primary font-medium">{t("hero.badge")}</span>
           </motion.div>
 
           {/* Main Heading */}
           <h1 className="luxury-heading text-foreground mb-6">
-            <span className="block">LuxTaxi</span>
-            <span className="gold-gradient-text">Македонија</span>
+            <span className="block">{t("hero.title")}</span>
+            <span className="gold-gradient-text">{t("hero.subtitle")}</span>
           </h1>
 
           {/* Subheading */}
           <p className="luxury-subheading max-w-2xl mx-auto mb-8">
-            Луксузен такси превоз за туристи, бизнис клиенти и делегации низ Македонија и Балканот
+            {t("hero.description")}
           </p>
 
           {/* Tagline */}
@@ -54,7 +57,7 @@ export function Hero() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-foreground/60 font-serif italic text-lg mb-10"
           >
-            „Симбол на елеганција, сигурност и врвна услуга"
+            {t("hero.tagline")}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -65,10 +68,10 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button variant="gold" size="xl" asChild>
-              <Link to="/contact">Резервирај Сега</Link>
+              <Link to="/contact">{t("hero.bookNow")}</Link>
             </Button>
             <Button variant="gold-outline" size="xl" asChild>
-              <Link to="/destinations">Види Дестинации</Link>
+              <Link to="/destinations">{t("hero.viewDestinations")}</Link>
             </Button>
           </motion.div>
 
@@ -83,19 +86,19 @@ export function Hero() {
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Shield className="w-6 h-6 text-primary" />
               </div>
-              <span className="text-foreground/80 font-medium">Лиценциран Превоз</span>
+              <span className="text-foreground/80 font-medium">{t("hero.licensedTransport")}</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Clock className="w-6 h-6 text-primary" />
               </div>
-              <span className="text-foreground/80 font-medium">24/7 Достапност</span>
+              <span className="text-foreground/80 font-medium">{t("hero.availability")}</span>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Star className="w-6 h-6 text-primary" />
               </div>
-              <span className="text-foreground/80 font-medium">Професионални Шофери</span>
+              <span className="text-foreground/80 font-medium">{t("hero.professionalDrivers")}</span>
             </div>
           </motion.div>
         </motion.div>
