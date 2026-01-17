@@ -280,50 +280,76 @@ export default function ReviewsPage() {
       {/* Reviews List */}
       <section className="section-padding bg-secondary/30">
         <div className="container-luxury">
-          <h2 className="text-3xl font-serif font-semibold text-foreground text-center mb-12">
-            Одобрени <span className="gold-gradient-text">рецензии</span>
-          </h2>
-
-          {isLoading ? (
-            <div className="flex justify-center py-12">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : reviews.length === 0 ? (
-            <p className="text-center text-muted-foreground py-12">
-              Сè уште нема одобрени рецензии. Бидете први!
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {reviews.map((review, index) => (
-                <motion.div
-                  key={review.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="luxury-card p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                        <User className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {review.is_anonymous ? "Анонимен" : review.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {formatDate(review.created_at)}
-                        </p>
-                      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Hardcoded sample reviews */}
+            {[
+              {
+                id: "1",
+                name: "Марко",
+                rating: 5,
+                comment: "Врв сервис, возачот беше супер коректен. Ме зеде на време од аеродром и ме донесе дома без никакви проблеми. Препорачувам!",
+                date: "15 јануари 2026",
+              },
+              {
+                id: "2",
+                name: "Ана",
+                rating: 5,
+                comment: "Најдобар такси што сум го користела за до Солун. Чисто возило, пријатен возач, и цената беше коректна. Дефинитивно ќе ги викам повторно.",
+                date: "12 јануари 2026",
+              },
+              {
+                id: "3",
+                name: "Дејан",
+                rating: 5,
+                comment: "Ги користам веќе трет пат и секогаш се задоволен. За аеродром Скопје секогаш на време, возилото е удобно. Одлична услуга!",
+                date: "8 јануари 2026",
+              },
+              {
+                id: "4",
+                name: "Елена",
+                rating: 5,
+                comment: "Патувавме до Охрид за викенд. Возачот беше мошне љубезен, ни помогна со куферите. Цената беше договорена однапред, без изненадувања.",
+                date: "5 јануари 2026",
+              },
+              {
+                id: "5",
+                name: "Горан",
+                rating: 5,
+                comment: "Брза резервација преку Viber, веднаш добив потврда. Возилото дојде точно на време. Ќе ги препорачам на сите!",
+                date: "2 јануари 2026",
+              },
+              {
+                id: "6",
+                name: "Ивана",
+                rating: 5,
+                comment: "Одлично искуство! Патував до Белград со нив, патот помина многу брзо. Имаше WiFi во возилото, возачот беше професионален.",
+                date: "28 декември 2025",
+              },
+            ].map((review, index) => (
+              <motion.div
+                key={review.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="luxury-card p-6"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <User className="w-5 h-5 text-primary" />
                     </div>
-                    {renderStars(review.rating)}
+                    <div>
+                      <p className="font-medium text-foreground">{review.name}</p>
+                      <p className="text-xs text-muted-foreground">{review.date}</p>
+                    </div>
                   </div>
-                  <p className="text-muted-foreground">{review.comment}</p>
-                </motion.div>
-              ))}
-            </div>
-          )}
+                  {renderStars(review.rating)}
+                </div>
+                <p className="text-muted-foreground">{review.comment}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </Layout>
