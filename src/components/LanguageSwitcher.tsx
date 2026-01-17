@@ -1,18 +1,21 @@
 import { useLanguage, Language } from "@/contexts/LanguageContext";
 
-// Macedonian Flag SVG
+// Macedonian Flag SVG - Sun with 8 rays
 const MacedonianFlag = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-    <rect fill="#D20000" width="512" height="512"/>
-    <polygon fill="#FFE600" points="256,77 295,192 256,256"/>
-    <polygon fill="#FFE600" points="256,77 217,192 256,256"/>
-    <polygon fill="#FFE600" points="256,435 295,320 256,256"/>
-    <polygon fill="#FFE600" points="256,435 217,320 256,256"/>
-    <polygon fill="#FFE600" points="77,256 192,217 256,256"/>
-    <polygon fill="#FFE600" points="77,256 192,295 256,256"/>
-    <polygon fill="#FFE600" points="435,256 320,217 256,256"/>
-    <polygon fill="#FFE600" points="435,256 320,295 256,256"/>
-    <circle fill="#D20000" cx="256" cy="256" r="77" stroke="#FFE600" strokeWidth="20"/>
+  <svg className={className} viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+    <rect fill="#D20000" width="1200" height="600"/>
+    {/* 8 rays emanating from center to edges */}
+    <polygon fill="#FFE600" points="600,300 0,0 0,150"/>
+    <polygon fill="#FFE600" points="600,300 0,450 0,600"/>
+    <polygon fill="#FFE600" points="600,300 1200,0 1200,150"/>
+    <polygon fill="#FFE600" points="600,300 1200,450 1200,600"/>
+    <polygon fill="#FFE600" points="600,300 450,0 750,0"/>
+    <polygon fill="#FFE600" points="600,300 450,600 750,600"/>
+    <polygon fill="#FFE600" points="600,300 0,225 0,375"/>
+    <polygon fill="#FFE600" points="600,300 1200,225 1200,375"/>
+    {/* Central sun circle with red border */}
+    <circle fill="#FFE600" cx="600" cy="300" r="115"/>
+    <circle fill="none" cx="600" cy="300" r="115" stroke="#D20000" strokeWidth="20"/>
   </svg>
 );
 
