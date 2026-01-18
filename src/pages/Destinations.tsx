@@ -353,12 +353,17 @@ export default function DestinationsPage() {
                     >
                       <td className="px-6 py-4 text-foreground font-medium">{getDestinationName(dest)}</td>
                       <td className="px-6 py-4 text-right">
-                        {activeData?.isForeign ? (
-                          <span className="text-primary font-semibold">{dest.priceEur}</span>
+                        {activeData?.isForeign || activeCategory === "airports" ? (
+                          <div className="flex flex-col items-end gap-1">
+                            <span className="text-primary font-semibold text-lg">{dest.priceEur}</span>
+                            {dest.priceMkd && (
+                              <span className="text-muted-foreground text-sm">{dest.priceMkd}</span>
+                            )}
+                          </div>
                         ) : (
                           <div className="flex flex-col items-end gap-1">
                             {dest.priceMkd && (
-                              <span className="text-primary font-semibold">{dest.priceMkd}</span>
+                              <span className="text-primary font-semibold text-lg">{dest.priceMkd}</span>
                             )}
                             <span className="text-muted-foreground text-sm">{dest.priceEur}</span>
                           </div>
