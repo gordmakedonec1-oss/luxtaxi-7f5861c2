@@ -182,7 +182,7 @@ const translations: Record<Language, Record<string, string>> = {
     "destinationsPage.invoice": "Фактура",
     "destinationsPage.discountTitle": "Попуст за авансно плаќање",
     "destinationsPage.discountText":
-      "За сите резервации платени однапред (преку банкарска трансакција или картица), добивате 5% попуст на вкупната цена.",
+      "За сите резервации платени однапред (преку банкарска трансакција или картица), добивате 10% - 15% попуст на вкупната цена.",
     "destinationsPage.airports": "Аеродроми",
     "destinationsPage.borders": "Гранични Премини",
     "destinationsPage.greece": "Грција",
