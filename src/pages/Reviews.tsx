@@ -348,32 +348,66 @@ export default function ReviewsPage() {
       {/* Reviews List */}
       <section className="section-padding bg-secondary/30">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sampleReviews.map((review, index) => (
-              <motion.div
-                key={review.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="luxury-card p-6"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <User className="w-5 h-5 text-primary" />
+          {isLoading ? (
+            <div className="flex justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* First show database reviews, then sample reviews */}
+              {reviews.map((review, index) => (
+                <motion.div
+                  key={review.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="luxury-card p-6"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <User className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          {review.name || (language === "mk" ? "Анонимен" : "Anonymous")}
+                        </p>
+                        <p className="text-xs text-muted-foreground">{formatDate(review.created_at)}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium text-foreground">{review.name}</p>
-                      <p className="text-xs text-muted-foreground">{review.date}</p>
-                    </div>
+                    {renderStars(review.rating)}
                   </div>
-                  {renderStars(review.rating)}
-                </div>
-                <p className="text-muted-foreground">{review.comment}</p>
-              </motion.div>
-            ))}
-          </div>
+                  <p className="text-muted-foreground">{review.comment}</p>
+                </motion.div>
+              ))}
+              {/* Show sample reviews after database reviews */}
+              {sampleReviews.map((review, index) => (
+                <motion.div
+                  key={`sample-${review.id}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (reviews.length + index) * 0.1 }}
+                  className="luxury-card p-6"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <User className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">{review.name}</p>
+                        <p className="text-xs text-muted-foreground">{review.date}</p>
+                      </div>
+                    </div>
+                    {renderStars(review.rating)}
+                  </div>
+                  <p className="text-muted-foreground">{review.comment}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </Layout>
