@@ -1,13 +1,24 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+
+// Initialize Supabase client with service role for rate limiting
+const supabase = createClient(
+  Deno.env.get("SUPABASE_URL")!,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
 };
+
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MS = 3600000; // 1 hour
+const MAX_REQUESTS_PER_WINDOW = 5;
 
 interface ContactEmailRequest {
   name: string;
@@ -84,6 +95,35 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
+                     req.headers.get("cf-connecting-ip") || 
+                     "unknown";
+
+    // Check rate limit
+    const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
+    const { count, error: countError } = await supabase
+      .from("contact_form_log")
+      .select("*", { count: "exact", head: true })
+      .eq("ip_address", clientIP)
+      .gte("created_at", windowStart);
+
+    if (countError) {
+      console.error("Rate limit check failed:", countError);
+      // Continue processing if rate limit check fails (fail open for usability)
+    } else if (count !== null && count >= MAX_REQUESTS_PER_WINDOW) {
+      console.warn(`Rate limit exceeded for IP: ${clientIP}, count: ${count}`);
+      return new Response(
+        JSON.stringify({ 
+          error: "Премногу барања. Ве молиме обидете се повторно подоцна." 
+        }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
     const requestData: ContactEmailRequest = await req.json();
 
     // Validate input
@@ -145,6 +185,16 @@ const handler = async (req: Request): Promise<Response> => {
         <p style="margin-top: 20px; color: #666;">Оваа порака е испратена преку контакт формата на LuxTaxi веб страницата.</p>
       `,
     });
+
+    // Log successful submission for rate limiting
+    const { error: logError } = await supabase
+      .from("contact_form_log")
+      .insert({ ip_address: clientIP });
+
+    if (logError) {
+      console.error("Failed to log submission:", logError);
+      // Continue - don't fail the request if logging fails
+    }
 
     console.log("Email sent successfully");
 
