@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "За Нас",
     "nav.contact": "Контакт",
     "nav.book": "Резервирај",
-    
+
     // Hero
     "hero.badge": "Премиум ВИП Превоз",
     "hero.title": "LuxTaxi",
@@ -34,7 +34,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.licensedTransport": "Лиценциран Превоз",
     "hero.availability": "24/7 Достапност",
     "hero.professionalDrivers": "Професионални Шофери",
-    
+
     // Services section (home)
     "services.label": "Наши Услуги",
     "services.title": "Премиум",
@@ -42,14 +42,18 @@ const translations: Record<Language, Record<string, string>> = {
     "services.subtitle": "Од аеродромски трансфери до луксузни тури низ балканските метрополи",
     "services.allServices": "Сите Услуги",
     "services.vip.title": "ВИП Превоз",
-    "services.vip.description": "Луксузен ВИП превоз од Битола со дискретен и искусен шофер, идеален за клиенти кои очекуваат највисоко ниво на услуга.",
+    "services.vip.description":
+      "Луксузен ВИП превоз од Битола со дискретен и искусен шофер, идеален за клиенти кои очекуваат највисоко ниво на услуга.",
     "services.corporate.title": "Корпоративен Транспорт",
-    "services.corporate.description": "Обезбедуваме корпоративен транспорт за ИТ компании, странски фирми и деловни партнери. Точност и професионалност.",
+    "services.corporate.description":
+      "Обезбедуваме корпоративен транспорт за ИТ компании, странски фирми и деловни партнери. Точност и професионалност.",
     "services.delegations.title": "Превоз на Делегации",
-    "services.delegations.description": "Транспорт на странски делегации и државни гости со највисоки стандарди за безбедност и репрезентативност.",
+    "services.delegations.description":
+      "Транспорт на странски делегации и државни гости со највисоки стандарди за безбедност и репрезентативност.",
     "services.airport.title": "Аеродромски Трансфери",
-    "services.airport.description": "Сигурен и луксузен аеродромски трансфер од Битола до сите балкански аеродроми. Навремено пристигнување, без стрес.",
-    
+    "services.airport.description":
+      "Сигурен и луксузен аеродромски трансфер од Битола до сите балкански аеродроми. Навремено пристигнување, без стрес.",
+
     // Why Us section
     "whyUs.label": "Зошто Ние",
     "whyUs.title": "Зошто да",
@@ -67,7 +71,7 @@ const translations: Record<Language, Record<string, string>> = {
     "whyUs.prices.description": "Транспарентен ценовник без скриени трошоци. Знаете колку плаќате.",
     "whyUs.support.title": "24/7 Поддршка",
     "whyUs.support.description": "Достапни сме во секое време за вашите резервации и прашања.",
-    
+
     // CTA section
     "cta.title": "Подготвени сте за",
     "cta.titleHighlight": "патување?",
@@ -75,7 +79,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.callNow": "Јави се сега",
     "cta.contactForm": "Контакт форма",
     "cta.available": "Достапни 24/7",
-    
+
     // Footer
     "footer.description": "Премиум такси услуги за туристи, бизнис клиенти и делегации низ Македонија и Балканот.",
     "footer.navigation": "Навигација",
@@ -110,28 +114,32 @@ const translations: Record<Language, Record<string, string>> = {
     "servicesPage.titleHighlight": "Услуги",
     "servicesPage.subtitle": "Од ВИП превоз до корпоративен транспорт - целосна палета на луксузни услуги",
     "servicesPage.vip.title": "ВИП и наменски превоз со професионален шофер",
-    "servicesPage.vip.description": "LuxTaxi нуди луксузен ВИП превоз од Битола со дискретен и искусен шофер, идеален за клиенти кои очекуваат највисоко ниво на услуга. Нашите возила се нови, климатизирани и целосно опремени за комфорно патување.",
+    "servicesPage.vip.description":
+      "LuxTaxi нуди луксузен ВИП превоз од Битола со дискретен и искусен шофер, идеален за клиенти кои очекуваат највисоко ниво на услуга. Нашите возила се нови, климатизирани и целосно опремени за комфорно патување.",
     "servicesPage.vip.feature1": "Дискретен и искусен шофер",
     "servicesPage.vip.feature2": "Нови, климатизирани возила",
     "servicesPage.vip.feature3": "Целосно опремени за комфор",
     "servicesPage.vip.feature4": "Идеално за индивидуални клиенти",
     "servicesPage.vip.feature5": "Совршено за туристи и деловни патувања",
     "servicesPage.corporate.title": "Корпоративен транспорт за бизниси и ИТ компании",
-    "servicesPage.corporate.description": "Обезбедуваме корпоративен транспорт во Македонија за ИТ компании, странски фирми и деловни партнери. Точноста, професионалниот пристап и флексибилноста нè прават доверлив партнер за секој бизнис настан.",
+    "servicesPage.corporate.description":
+      "Обезбедуваме корпоративен транспорт во Македонија за ИТ компании, странски фирми и деловни партнери. Точноста, професионалниот пристап и флексибилноста нè прават доверлив партнер за секој бизнис настан.",
     "servicesPage.corporate.feature1": "Транспорт за ИТ компании",
     "servicesPage.corporate.feature2": "Превоз на деловни партнери",
     "servicesPage.corporate.feature3": "Точност и професионалност",
     "servicesPage.corporate.feature4": "Флексибилни термини",
     "servicesPage.corporate.feature5": "Долгорочна соработка",
     "servicesPage.delegations.title": "Превоз на делегации и официјални гости",
-    "servicesPage.delegations.description": "LuxTaxi е вистинскиот избор за транспорт на странски делегации и државни гости. Нашиот возен парк одговара на највисоките стандарди за безбедност и репрезентативност.",
+    "servicesPage.delegations.description":
+      "LuxTaxi е вистинскиот избор за транспорт на странски делегации и државни гости. Нашиот возен парк одговара на највисоките стандарди за безбедност и репрезентативност.",
     "servicesPage.delegations.feature1": "Транспорт на странски делегации",
     "servicesPage.delegations.feature2": "Превоз на државни гости",
     "servicesPage.delegations.feature3": "Највисоки стандарди за безбедност",
     "servicesPage.delegations.feature4": "Пречек на аеродром",
     "servicesPage.delegations.feature5": "Комплетна логистичка поддршка",
     "servicesPage.airport.title": "Аеродромски трансфери",
-    "servicesPage.airport.description": "Нудиме сигурен и луксузен аеродромски трансфер од Битола до Скопје и обратно, идеален за туристи, бизнис клиенти и странски делегации. Со LuxTaxi, секогаш пристигнувате навреме.",
+    "servicesPage.airport.description":
+      "Нудиме сигурен и луксузен аеродромски трансфер од Битола до Скопје и обратно, идеален за туристи, бизнис клиенти и странски делегации. Со LuxTaxi, секогаш пристигнувате навреме.",
     "servicesPage.airport.feature1": "Трансфери до сите балкански аеродроми",
     "servicesPage.airport.feature2": "Следење на лет во реално време",
     "servicesPage.airport.feature3": "Навремено пристигнување",
@@ -173,7 +181,8 @@ const translations: Record<Language, Record<string, string>> = {
     "destinationsPage.card": "Картица",
     "destinationsPage.invoice": "Фактура",
     "destinationsPage.discountTitle": "Попуст за авансно плаќање",
-    "destinationsPage.discountText": "За сите резервации платени однапред (преку банкарска трансакција или картица), добивате 5% попуст на вкупната цена.",
+    "destinationsPage.discountText":
+      "За сите резервации платени однапред (преку банкарска трансакција или картица), добивате 5% попуст на вкупната цена.",
     "destinationsPage.airports": "Аеродроми",
     "destinationsPage.borders": "Гранични Премини",
     "destinationsPage.greece": "Грција",
@@ -201,18 +210,24 @@ const translations: Record<Language, Record<string, string>> = {
     "aboutPage.stat4": "Достапност",
     "aboutPage.welcomeTitle": "Добредојдовте во",
     "aboutPage.welcomeTitleHighlight": "LuxTaxi Македонија",
-    "aboutPage.welcomeText1": "Нашите модерни возила и професионални шофери овозможуваат незаборавно и безбедно патување, без разлика дали патувате кон аеродром, деловен состанок или вашата омилена туристичка дестинација.",
-    "aboutPage.welcomeText2": "Од ВИП аеродромски трансфери, преку приватен превоз за деловни и дипломатски клиенти, до луксузни тури низ балканските метрополи – секое патување со нас е искуство на класа, прецизност и стил.",
-    "aboutPage.welcomeText3": "Со седиште во Битола, ги покриваме сите дестинации низ Македонија и Балканот. Нашата мисија е да обезбедиме врвен комфорт и сигурност за секој патник.",
+    "aboutPage.welcomeText1":
+      "Нашите модерни возила и професионални шофери овозможуваат незаборавно и безбедно патување, без разлика дали патувате кон аеродром, деловен состанок или вашата омилена туристичка дестинација.",
+    "aboutPage.welcomeText2":
+      "Од ВИП аеродромски трансфери, преку приватен превоз за деловни и дипломатски клиенти, до луксузни тури низ балканските метрополи – секое патување со нас е искуство на класа, прецизност и стил.",
+    "aboutPage.welcomeText3":
+      "Со седиште во Битола, ги покриваме сите дестинации низ Македонија и Балканот. Нашата мисија е да обезбедиме врвен комфорт и сигурност за секој патник.",
     "aboutPage.valuesLabel": "Наши Вредности",
     "aboutPage.valuesTitle": "Што нè",
     "aboutPage.valuesTitleHighlight": "издвојува",
     "aboutPage.safety.title": "Безбедност",
-    "aboutPage.safety.description": "Безбедноста на нашите патници е наш приоритет. Лиценцирани возила со редовен сервис.",
+    "aboutPage.safety.description":
+      "Безбедноста на нашите патници е наш приоритет. Лиценцирани возила со редовен сервис.",
     "aboutPage.punctuality.title": "Точност",
-    "aboutPage.punctuality.description": "Секогаш сме навреме. Го следиме вашиот лет и се прилагодуваме на вашите потреби.",
+    "aboutPage.punctuality.description":
+      "Секогаш сме навреме. Го следиме вашиот лет и се прилагодуваме на вашите потреби.",
     "aboutPage.professionalism.title": "Професионалност",
-    "aboutPage.professionalism.description": "Нашите шофери се обучени за врвна услуга и дискреција. Секој детал е важен.",
+    "aboutPage.professionalism.description":
+      "Нашите шофери се обучени за врвна услуга и дискреција. Секој детал е важен.",
     "aboutPage.dedication.title": "Посветеност",
     "aboutPage.dedication.description": "Секој клиент е важен. Се грижиме за вашето комфорно и пријатно патување.",
     "aboutPage.cta.title": "Започнете го патувањето",
@@ -287,19 +302,20 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "About Us",
     "nav.contact": "Contact",
     "nav.book": "Book Now",
-    
+
     // Hero
     "hero.badge": "Premium VIP Transport",
     "hero.title": "LuxTaxi",
     "hero.subtitle": "Macedonia",
-    "hero.description": "Luxury taxi transport for tourists, business clients and delegations across Macedonia and the Balkans",
+    "hero.description":
+      "Luxury taxi transport for tourists, business clients and delegations across Macedonia and the Balkans",
     "hero.tagline": "A symbol of elegance, safety and premium service",
     "hero.bookNow": "Book Now",
     "hero.viewDestinations": "View Destinations",
     "hero.licensedTransport": "Licensed Transport",
     "hero.availability": "24/7 Availability",
     "hero.professionalDrivers": "Professional Drivers",
-    
+
     // Services section (home)
     "services.label": "Our Services",
     "services.title": "Premium",
@@ -307,14 +323,18 @@ const translations: Record<Language, Record<string, string>> = {
     "services.subtitle": "From airport transfers to luxury tours across Balkan metropolises",
     "services.allServices": "All Services",
     "services.vip.title": "VIP Transport",
-    "services.vip.description": "Luxury VIP transport from Bitola with a discreet and experienced driver, ideal for clients who expect the highest level of service.",
+    "services.vip.description":
+      "Luxury VIP transport from Bitola with a discreet and experienced driver, ideal for clients who expect the highest level of service.",
     "services.corporate.title": "Corporate Transport",
-    "services.corporate.description": "We provide corporate transport for IT companies, foreign firms and business partners. Punctuality and professionalism.",
+    "services.corporate.description":
+      "We provide corporate transport for IT companies, foreign firms and business partners. Punctuality and professionalism.",
     "services.delegations.title": "Delegation Transport",
-    "services.delegations.description": "Transport of foreign delegations and state guests with the highest standards of security and representativeness.",
+    "services.delegations.description":
+      "Transport of foreign delegations and state guests with the highest standards of security and representativeness.",
     "services.airport.title": "Airport Transfers",
-    "services.airport.description": "Safe and luxurious airport transfer from Bitola to all Balkan airports. Timely arrival, stress-free.",
-    
+    "services.airport.description":
+      "Safe and luxurious airport transfer from Bitola to all Balkan airports. Timely arrival, stress-free.",
+
     // Why Us section
     "whyUs.label": "Why Us",
     "whyUs.title": "Why",
@@ -332,7 +352,7 @@ const translations: Record<Language, Record<string, string>> = {
     "whyUs.prices.description": "Transparent pricing without hidden costs. You know what you pay.",
     "whyUs.support.title": "24/7 Support",
     "whyUs.support.description": "We are available at any time for your reservations and questions.",
-    
+
     // CTA section
     "cta.title": "Ready for your",
     "cta.titleHighlight": "journey?",
@@ -340,9 +360,10 @@ const translations: Record<Language, Record<string, string>> = {
     "cta.callNow": "Call Now",
     "cta.contactForm": "Contact Form",
     "cta.available": "Available 24/7",
-    
+
     // Footer
-    "footer.description": "Premium taxi services for tourists, business clients and delegations across Macedonia and the Balkans.",
+    "footer.description":
+      "Premium taxi services for tourists, business clients and delegations across Macedonia and the Balkans.",
     "footer.navigation": "Navigation",
     "footer.contact": "Contact",
     "footer.followUs": "Follow Us",
@@ -375,28 +396,32 @@ const translations: Record<Language, Record<string, string>> = {
     "servicesPage.titleHighlight": "Services",
     "servicesPage.subtitle": "From VIP transport to corporate transportation - a complete range of luxury services",
     "servicesPage.vip.title": "VIP and Private Transport with Professional Driver",
-    "servicesPage.vip.description": "LuxTaxi offers luxury VIP transport from Bitola with a discreet and experienced driver, ideal for clients who expect the highest level of service. Our vehicles are new, air-conditioned and fully equipped for comfortable travel.",
+    "servicesPage.vip.description":
+      "LuxTaxi offers luxury VIP transport from Bitola with a discreet and experienced driver, ideal for clients who expect the highest level of service. Our vehicles are new, air-conditioned and fully equipped for comfortable travel.",
     "servicesPage.vip.feature1": "Discreet and experienced driver",
     "servicesPage.vip.feature2": "New, air-conditioned vehicles",
     "servicesPage.vip.feature3": "Fully equipped for comfort",
     "servicesPage.vip.feature4": "Ideal for individual clients",
     "servicesPage.vip.feature5": "Perfect for tourists and business trips",
     "servicesPage.corporate.title": "Corporate Transport for Businesses and IT Companies",
-    "servicesPage.corporate.description": "We provide corporate transport in Macedonia for IT companies, foreign firms and business partners. Punctuality, professional approach and flexibility make us a reliable partner for any business event.",
+    "servicesPage.corporate.description":
+      "We provide corporate transport in Macedonia for IT companies, foreign firms and business partners. Punctuality, professional approach and flexibility make us a reliable partner for any business event.",
     "servicesPage.corporate.feature1": "Transport for IT companies",
     "servicesPage.corporate.feature2": "Business partner transport",
     "servicesPage.corporate.feature3": "Punctuality and professionalism",
     "servicesPage.corporate.feature4": "Flexible scheduling",
     "servicesPage.corporate.feature5": "Long-term cooperation",
     "servicesPage.delegations.title": "Transport of Delegations and Official Guests",
-    "servicesPage.delegations.description": "LuxTaxi is the right choice for transport of foreign delegations and state guests. Our fleet meets the highest standards of safety and representativeness.",
+    "servicesPage.delegations.description":
+      "LuxTaxi is the right choice for transport of foreign delegations and state guests. Our fleet meets the highest standards of safety and representativeness.",
     "servicesPage.delegations.feature1": "Transport of foreign delegations",
     "servicesPage.delegations.feature2": "State guest transport",
     "servicesPage.delegations.feature3": "Highest safety standards",
     "servicesPage.delegations.feature4": "Airport reception",
     "servicesPage.delegations.feature5": "Complete logistical support",
     "servicesPage.airport.title": "Airport Transfers",
-    "servicesPage.airport.description": "We offer safe and luxurious airport transfer from Bitola to Skopje and back, ideal for tourists, business clients and foreign delegations. With LuxTaxi, you always arrive on time.",
+    "servicesPage.airport.description":
+      "We offer safe and luxurious airport transfer from Bitola to Skopje and back, ideal for tourists, business clients and foreign delegations. With LuxTaxi, you always arrive on time.",
     "servicesPage.airport.feature1": "Transfers to all Balkan airports",
     "servicesPage.airport.feature2": "Real-time flight tracking",
     "servicesPage.airport.feature3": "Timely arrival",
@@ -411,7 +436,8 @@ const translations: Record<Language, Record<string, string>> = {
     "fleetPage.label": "Fleet",
     "fleetPage.title": "Our",
     "fleetPage.titleHighlight": "Vehicles",
-    "fleetPage.subtitle": "Modern Volkswagen Passat vehicles, equipped with everything you need for a comfortable journey",
+    "fleetPage.subtitle":
+      "Modern Volkswagen Passat vehicles, equipped with everything you need for a comfortable journey",
     "fleetPage.passengers": "4 passengers",
     "fleetPage.climate": "Climate Control",
     "fleetPage.wireless": "Wireless",
@@ -438,7 +464,8 @@ const translations: Record<Language, Record<string, string>> = {
     "destinationsPage.card": "Card",
     "destinationsPage.invoice": "Invoice",
     "destinationsPage.discountTitle": "Discount for Advance Payment",
-    "destinationsPage.discountText": "For all reservations paid in advance (via bank transfer or card), you receive a 5% discount on the total price.",
+    "destinationsPage.discountText":
+      "For all reservations paid in advance (via bank transfer or card), you receive a 10% or 15% discount on the total price.",
     "destinationsPage.airports": "Airports",
     "destinationsPage.borders": "Border Crossings",
     "destinationsPage.greece": "Greece",
@@ -466,18 +493,23 @@ const translations: Record<Language, Record<string, string>> = {
     "aboutPage.stat4": "Availability",
     "aboutPage.welcomeTitle": "Welcome to",
     "aboutPage.welcomeTitleHighlight": "LuxTaxi Macedonia",
-    "aboutPage.welcomeText1": "Our modern vehicles and professional drivers ensure an unforgettable and safe journey, whether you're traveling to an airport, business meeting, or your favorite tourist destination.",
-    "aboutPage.welcomeText2": "From VIP airport transfers, through private transport for business and diplomatic clients, to luxury tours through Balkan metropolises – every journey with us is an experience of class, precision and style.",
-    "aboutPage.welcomeText3": "Based in Bitola, we cover all destinations across Macedonia and the Balkans. Our mission is to provide top comfort and safety for every passenger.",
+    "aboutPage.welcomeText1":
+      "Our modern vehicles and professional drivers ensure an unforgettable and safe journey, whether you're traveling to an airport, business meeting, or your favorite tourist destination.",
+    "aboutPage.welcomeText2":
+      "From VIP airport transfers, through private transport for business and diplomatic clients, to luxury tours through Balkan metropolises – every journey with us is an experience of class, precision and style.",
+    "aboutPage.welcomeText3":
+      "Based in Bitola, we cover all destinations across Macedonia and the Balkans. Our mission is to provide top comfort and safety for every passenger.",
     "aboutPage.valuesLabel": "Our Values",
     "aboutPage.valuesTitle": "What makes us",
     "aboutPage.valuesTitleHighlight": "different",
     "aboutPage.safety.title": "Safety",
-    "aboutPage.safety.description": "The safety of our passengers is our priority. Licensed vehicles with regular maintenance.",
+    "aboutPage.safety.description":
+      "The safety of our passengers is our priority. Licensed vehicles with regular maintenance.",
     "aboutPage.punctuality.title": "Punctuality",
     "aboutPage.punctuality.description": "We are always on time. We track your flight and adapt to your needs.",
     "aboutPage.professionalism.title": "Professionalism",
-    "aboutPage.professionalism.description": "Our drivers are trained for top service and discretion. Every detail matters.",
+    "aboutPage.professionalism.description":
+      "Our drivers are trained for top service and discretion. Every detail matters.",
     "aboutPage.dedication.title": "Dedication",
     "aboutPage.dedication.description": "Every client is important. We care for your comfortable and pleasant journey.",
     "aboutPage.cta.title": "Start your journey",
@@ -567,11 +599,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     return translations[language][key] || key;
   };
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {
