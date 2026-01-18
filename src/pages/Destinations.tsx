@@ -338,8 +338,8 @@ export default function DestinationsPage() {
               <table className="w-full">
                 <thead className="bg-secondary/50">
                   <tr>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-foreground">{t("destinationsPage.destination")}</th>
-                    <th className="text-right px-6 py-4 text-sm font-semibold text-foreground">{t("destinationsPage.price")}</th>
+                    <th className="text-left px-6 py-4 text-base font-semibold text-foreground">{t("destinationsPage.destination")}</th>
+                    <th className="text-right px-6 py-4 text-base font-semibold text-foreground">{t("destinationsPage.price")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
