@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Star, Send, Loader2, User, Mail } from "lucide-react";
+import { Star, Send, Loader2, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -23,7 +23,6 @@ export default function ReviewsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     rating: 5,
     comment: "",
     isAnonymous: false,
@@ -76,7 +75,6 @@ export default function ReviewsPage() {
     try {
       const { error } = await supabase.from("reviews").insert({
         name: formData.isAnonymous ? null : formData.name.trim(),
-        email: formData.email.trim() || null,
         rating: formData.rating,
         comment: formData.comment.trim(),
         is_anonymous: formData.isAnonymous,
@@ -91,7 +89,6 @@ export default function ReviewsPage() {
 
       setFormData({
         name: "",
-        email: "",
         rating: 5,
         comment: "",
         isAnonymous: false,
@@ -283,37 +280,20 @@ export default function ReviewsPage() {
                 </div>
 
                 {!formData.isAnonymous && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">
-                        <User className="w-4 h-4 inline mr-1" />
-                        {t("reviewsPage.nameLabel")}
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder={t("reviewsPage.namePlaceholder")}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">
-                        <Mail className="w-4 h-4 inline mr-1" />
-                        {t("reviewsPage.emailLabel")}
-                      </label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                        placeholder={t("reviewsPage.emailPlaceholder")}
-                      />
-                    </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">
+                      <User className="w-4 h-4 inline mr-1" />
+                      {t("reviewsPage.nameLabel")}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                      placeholder={t("reviewsPage.namePlaceholder")}
+                    />
                   </div>
                 )}
 
@@ -359,9 +339,6 @@ export default function ReviewsPage() {
                   )}
                 </Button>
 
-                <p className="text-sm text-muted-foreground text-center">
-                  {t("reviewsPage.approvalNote")}
-                </p>
               </form>
             </motion.div>
           </div>
