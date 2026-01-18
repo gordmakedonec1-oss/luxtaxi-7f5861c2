@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_form_log: {
+        Row: {
+          created_at: string
+          id: string
+          ip_address: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_address: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_address?: string
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           comment: string
@@ -75,7 +93,7 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      cleanup_old_contact_logs: { Args: never; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
