@@ -32,6 +32,7 @@ export default function ContactPage() {
     destination: "",
     date: "",
     message: "",
+    website: "", // Honeypot field
   });
 
   const contactInfo = [
@@ -84,6 +85,7 @@ export default function ContactPage() {
           destination: formData.destination.trim(),
           date: formData.date,
           message: formData.message.trim() || "Нема порака",
+          website: formData.website, // Honeypot field
         },
       });
 
@@ -101,6 +103,7 @@ export default function ContactPage() {
         destination: "",
         date: "",
         message: "",
+        website: "",
       });
     } catch (error: any) {
       console.error("Error sending message:", error);
@@ -224,6 +227,20 @@ export default function ContactPage() {
                 <h3 className="text-2xl font-serif font-semibold text-foreground mb-6">{t("contactPage.formTitle")}</h3>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Honeypot field - hidden from users, visible to bots */}
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      name="website"
+                      id="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+                  
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">{t("contactPage.nameLabel")}</label>

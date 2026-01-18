@@ -27,6 +27,7 @@ interface ContactEmailRequest {
   destination: string;
   date: string;
   message: string;
+  website?: string; // Honeypot field - should always be empty
 }
 
 // Input validation function
@@ -125,6 +126,16 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const requestData: ContactEmailRequest = await req.json();
+
+    // Honeypot check - if filled, it's likely a bot
+    if (requestData.website && requestData.website.trim() !== "") {
+      console.log("Bot detected via honeypot field");
+      // Return fake success to confuse bots
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     // Validate input
     const validationError = validateInput(requestData);
