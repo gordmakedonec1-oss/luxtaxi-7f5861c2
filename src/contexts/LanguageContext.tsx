@@ -85,7 +85,6 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.navigation": "Навигација",
     "footer.contact": "Контакт",
     "footer.followUs": "Следете Нè",
-    "footer.waitingFee": "Чекање: 1 час = 400 ден.",
     "footer.rights": "Сите права задржани.",
     "footer.luxuryTransport": "Луксузен превоз од Битола до сите дестинации",
     "footer.location": "Битола, Македонија",
