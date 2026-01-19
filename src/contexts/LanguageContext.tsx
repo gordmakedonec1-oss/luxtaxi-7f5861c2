@@ -366,7 +366,6 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.navigation": "Navigation",
     "footer.contact": "Contact",
     "footer.followUs": "Follow Us",
-    "footer.waitingFee": "Waiting: 1 hour = 400 MKD",
     "footer.rights": "All rights reserved.",
     "footer.luxuryTransport": "Luxury transport from Bitola to all destinations",
     "footer.location": "Bitola, Macedonia",
