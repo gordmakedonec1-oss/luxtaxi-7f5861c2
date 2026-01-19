@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent } from "lucide-react";
+import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Destination {
@@ -397,6 +397,10 @@ export default function DestinationsPage() {
                   <FileText className="w-5 h-5 text-primary" />
                   <span>{t("destinationsPage.invoice")}</span>
                 </div>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="w-5 h-5 text-primary" />
+                <span>{language === "mk" ? "Чекање: 1 час = 400 ден." : "Waiting: 1 hour = 400 MKD"}</span>
               </div>
             </div>
 
