@@ -106,7 +106,10 @@ export default function ContactPage() {
         website: "",
       });
     } catch (error: any) {
-      console.error("Error sending message:", error);
+      // Only log detailed errors in development
+      if (import.meta.env.DEV) {
+        console.error("Error sending message:", error);
+      }
       toast({
         title: t("contactPage.errorTitle"),
         description: t("contactPage.errorMessage"),

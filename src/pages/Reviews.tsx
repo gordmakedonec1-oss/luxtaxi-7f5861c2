@@ -43,7 +43,10 @@ export default function ReviewsPage() {
       if (error) throw error;
       setReviews(data || []);
     } catch (error) {
-      console.error("Error fetching reviews:", error);
+      // Only log detailed errors in development
+      if (import.meta.env.DEV) {
+        console.error("Error fetching reviews:", error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +97,10 @@ export default function ReviewsPage() {
         isAnonymous: false,
       });
     } catch (error: any) {
-      console.error("Error submitting review:", error);
+      // Only log detailed errors in development
+      if (import.meta.env.DEV) {
+        console.error("Error submitting review:", error);
+      }
       toast({
         title: t("reviewsPage.errorTitle"),
         description: t("reviewsPage.errorMessage"),
