@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -12,13 +13,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-gold-dark flex items-center justify-center">
-                <span className="text-primary-foreground font-serif font-bold text-xl">LT</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-semibold text-foreground">LuxTaxi</h3>
-                <p className="text-xs text-muted-foreground tracking-widest uppercase">{t("hero.subtitle")}</p>
-              </div>
+              <img src={logo} alt="LuxTaxi Logo" className="h-20 w-auto" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {t("footer.description")}

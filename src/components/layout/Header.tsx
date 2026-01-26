@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,13 +44,7 @@ export function Header() {
       <div className="container-luxury flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-gold-dark flex items-center justify-center">
-            <span className="text-primary-foreground font-serif font-bold text-xl">LT</span>
-          </div>
-          <div className="hidden sm:block">
-            <h1 className="text-xl font-serif font-semibold text-foreground">LuxTaxi</h1>
-            <p className="text-xs text-muted-foreground tracking-widest uppercase">{t("hero.subtitle")}</p>
-          </div>
+          <img src={logo} alt="LuxTaxi Logo" className="h-14 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
