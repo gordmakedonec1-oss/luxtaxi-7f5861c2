@@ -25,8 +25,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.badge": "Премиум ВИП Превоз",
-    "hero.title": "LuxTaxi",
-    "hero.subtitle": "Македонија",
+    "hero.title": "LuxTaxi Битола.",
+    "hero.subtitle": "Вашиот партнер во патувањето.",
     "hero.description": "Луксузен такси превоз за туристи, бизнис клиенти и делегации низ Македонија и Балканот",
     "hero.tagline": "Симбол на елеганција, сигурност и врвна услуга",
     "hero.bookNow": "Резервирај Сега",
@@ -304,8 +304,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.badge": "Premium VIP Transport",
-    "hero.title": "LuxTaxi",
-    "hero.subtitle": "Macedonia",
+    "hero.title": "LuxTaxi Bitola.",
+    "hero.subtitle": "Your travel partner.",
     "hero.description":
       "Luxury taxi transport for tourists, business clients and delegations across Macedonia and the Balkans",
     "hero.tagline": "A symbol of elegance, safety and premium service",
