@@ -93,7 +93,6 @@ export function Footer() {
                 <Instagram className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground mt-6">{t("footer.waitingFee")}</p>
           </div>
         </div>
       </div>
