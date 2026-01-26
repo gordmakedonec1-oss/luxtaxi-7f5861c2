@@ -79,7 +79,9 @@ export function Footer() {
             <h4 className="text-lg font-serif font-semibold text-foreground mb-6">{t("footer.followUs")}</h4>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61586878543519"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 aria-label="Facebook"
               >
