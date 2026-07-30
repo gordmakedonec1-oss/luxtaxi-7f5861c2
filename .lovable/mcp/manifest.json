@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "sdk_version": "0.25.1",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://bafsspfgqaiqjbxqalfy.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "luxtaxi-balkan-journeys",
+      "version": "0.1.0",
+      "title": "LuxTaxi Balkan Journeys"
+    },
+    "tools": [
+      {
+        "name": "get_destinations",
+        "title": "Get Destinations",
+        "description": "List LuxTaxi destinations and one-way prices from Bitola, grouped by category (airports, borders, Greece, Serbia, Albania, Bulgaria, Croatia, Montenegro, Kosovo, tourist spots, Macedonian cities).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "enum": [
+                "all",
+                "airports",
+                "borders",
+                "greece",
+                "serbia",
+                "albania",
+                "bulgaria",
+                "croatia",
+                "montenegro",
+                "kosovo",
+                "tourist",
+                "cities"
+              ],
+              "default": "all",
+              "description": "Filter by destination category."
+            },
+            "search": {
+              "type": "string",
+              "description": "Optional case-insensitive search term for destination name."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_services",
+        "title": "Get Services",
+        "description": "List the taxi services offered by LuxTaxi: VIP transfers, corporate transport, delegations, and airport transfers.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Get Contact Info",
+        "description": "Return LuxTaxi contact methods (phone, Viber, WhatsApp, email), location, fleet, and working hours.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_reviews",
+        "title": "Get Reviews",
+        "description": "Fetch approved public reviews left by LuxTaxi customers, ordered newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20,
+              "description": "Maximum number of reviews to return."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_review",
+        "title": "Submit Review",
+        "description": "Submit a customer review for LuxTaxi. Requires authentication; the review is recorded with the signed-in user's identity.",
+        "annotations": {
+          "readOnlyHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Star rating from 1 to 5."
+            },
+            "comment": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 1000,
+              "description": "Review comment."
+            },
+            "name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100,
+              "description": "Optional display name. Defaults to the signed-in user's first name if available."
+            }
+          },
+          "required": [
+            "rating",
+            "comment"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_contact_inquiry",
+        "title": "Submit Contact Inquiry",
+        "description": "Send a ride inquiry or message to LuxTaxi via the contact form. Requires authentication.",
+        "annotations": {
+          "readOnlyHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100,
+              "description": "Full name of the person making the inquiry."
+            },
+            "phone": {
+              "type": "string",
+              "minLength": 6,
+              "maxLength": 20,
+              "description": "Contact phone number."
+            },
+            "destination": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "Desired destination or route."
+            },
+            "date": {
+              "type": "string",
+              "maxLength": 50,
+              "description": "Desired travel date."
+            },
+            "message": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 2000,
+              "description": "Inquiry details."
+            }
+          },
+          "required": [
+            "name",
+            "phone",
+            "message"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

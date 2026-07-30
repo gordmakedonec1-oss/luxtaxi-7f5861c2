@@ -11,6 +11,7 @@ import Destinations from "./pages/Destinations";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Reviews from "./pages/Reviews";
+import OAuthConsent from "./pages/OAuthConsent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reviews" element={<Reviews />} />
+            <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
