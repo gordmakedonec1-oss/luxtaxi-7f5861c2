@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Plane, MapPin, Mountain, Building, Search, CreditCard, Banknote, FileText, Percent, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Seo } from "@/components/Seo";
 
 interface Destination {
   nameMk: string;
@@ -259,6 +260,7 @@ export default function DestinationsPage() {
 
   return (
     <Layout>
+      <Seo page="destinations" />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">

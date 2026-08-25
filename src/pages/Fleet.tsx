@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import passat1 from "@/assets/passat-1.jpg";
 import passat2 from "@/assets/passat-2.jpg";
 import passat3 from "@/assets/passat-3.jpg";
+import { Seo } from "@/components/Seo";
 
 export default function FleetPage() {
   const { t } = useLanguage();
@@ -39,6 +40,7 @@ export default function FleetPage() {
 
   return (
     <Layout>
+      <Seo page="fleet" />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">
