@@ -6,6 +6,8 @@ import { Star, Send, Loader2, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Seo } from "@/components/Seo";
+import { SITE_URL } from "@/lib/seo";
 
 interface Review {
   id: string;
@@ -230,8 +232,67 @@ export default function ReviewsPage() {
     },
   ];
 
+  // Structured data: aggregate rating + individual reviews
+  const allRatings = [
+    ...sampleReviews.map((r) => r.rating),
+    ...reviews.map((r) => r.rating),
+  ];
+  const ratingValue =
+    allRatings.length > 0
+      ? (allRatings.reduce((sum, r) => sum + r, 0) / allRatings.length).toFixed(1)
+      : null;
+
+  const reviewsJsonLd = ratingValue
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "TaxiService",
+          "@id": `${SITE_URL}/#organization`,
+          name: "LuxTaxi Македонија",
+          url: SITE_URL,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue,
+            bestRating: "5",
+            worstRating: "1",
+            reviewCount: allRatings.length,
+          },
+          review: [
+            ...sampleReviews.map((r) => ({
+              "@type": "Review",
+              author: { "@type": "Person", name: r.name },
+              datePublished: r.date,
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: r.rating,
+                bestRating: "5",
+                worstRating: "1",
+              },
+              reviewBody: r.comment,
+            })),
+            ...reviews.slice(0, 20).map((r) => ({
+              "@type": "Review",
+              author: {
+                "@type": "Person",
+                name: r.name || (language === "mk" ? "Анонимен" : "Anonymous"),
+              },
+              datePublished: new Date(r.created_at).toISOString().slice(0, 10),
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: r.rating,
+                bestRating: "5",
+                worstRating: "1",
+              },
+              reviewBody: r.comment,
+            })),
+          ],
+        },
+      ]
+    : [];
+
   return (
     <Layout>
+      <Seo page="reviews" jsonLd={reviewsJsonLd} />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">
