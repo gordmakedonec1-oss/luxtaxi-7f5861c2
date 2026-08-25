@@ -20,7 +20,7 @@ var destinationCategories = [
       { nameMk: "\u0411\u0435\u043B\u0433\u0440\u0430\u0434", nameEn: "Belgrade", priceMkd: null, priceEur: "370 \u20AC" },
       { nameMk: "\u041E\u0445\u0440\u0438\u0434", nameEn: "Ohrid", priceMkd: "3300 \u0434\u0435\u043D", priceEur: "55 \u20AC" },
       { nameMk: "\u0421\u043A\u043E\u043F\u0458\u0435", nameEn: "Skopje", priceMkd: "5500 \u0434\u0435\u043D", priceEur: "90 \u20AC" },
-      { nameMk: "\u0421\u043E\u043B\u0443\u043D", nameEn: "Thessaloniki", priceMkd: null, priceEur: "130 \u20AC" },
+      { nameMk: "\u0421\u043E\u043B\u0443\u043D", nameEn: "Thessaloniki", priceMkd: null, priceEur: "150 \u20AC" },
       { nameMk: "\u0421\u043E\u0444\u0438\u0458\u0430", nameEn: "Sofia", priceMkd: null, priceEur: "250 \u20AC" },
       { nameMk: "\u0422\u0438\u0440\u0430\u043D\u0430", nameEn: "Tirana", priceMkd: null, priceEur: "150 \u20AC" }
     ]
@@ -75,7 +75,7 @@ var destinationCategories = [
       { nameMk: "\u041F\u043E\u043B\u0438\u0445\u0440\u043E\u043D\u043E", nameEn: "Polychrono", priceEur: "170 \u20AC" },
       { nameMk: "\u041F\u0442\u043E\u043B\u0435\u043C\u0430\u0438\u0434\u0430", nameEn: "Ptolemaida", priceEur: "80 \u20AC" },
       { nameMk: "\u0421\u0430\u0440\u0442\u0438", nameEn: "Sarti", priceEur: "180 \u20AC" },
-      { nameMk: "\u0421\u043E\u043B\u0443\u043D", nameEn: "Thessaloniki", priceEur: "130 \u20AC" },
+      { nameMk: "\u0421\u043E\u043B\u0443\u043D", nameEn: "Thessaloniki", priceEur: "150 \u20AC" },
       { nameMk: "\u0421\u0442\u0430\u0432\u0440\u043E\u0441", nameEn: "Stavros", priceEur: "200 \u20AC" },
       { nameMk: "\u0422\u043E\u0440\u043E\u043D\u0438", nameEn: "Toroni", priceEur: "190 \u20AC" },
       { nameMk: "\u0423\u0440\u0430\u043D\u043E\u0443\u043F\u043E\u043B\u0438\u0441", nameEn: "Ouranoupoli", priceEur: "180 \u20AC" }
