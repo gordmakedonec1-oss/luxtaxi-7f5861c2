@@ -151,6 +151,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Врв сервис, возачот беше супер коректен. Ме зеде на време од аеродром и ме донесе дома без никакви проблеми. Препорачувам!",
       date: "15 јануари 2026",
+      isoDate: "2026-01-15",
     },
     {
       id: "2",
@@ -158,6 +159,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Најдобар такси што сум го користела за до Солун. Чисто возило, пријатен возач, и цената беше коректна. Дефинитивно ќе ги викам повторно.",
       date: "12 јануари 2026",
+      isoDate: "2026-01-12",
     },
     {
       id: "3",
@@ -165,6 +167,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Ги користам веќе трет пат и секогаш се задоволен. За аеродром Скопје секогаш на време, возилото е удобно. Одлична услуга!",
       date: "8 јануари 2026",
+      isoDate: "2026-01-08",
     },
     {
       id: "4",
@@ -172,6 +175,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Патувавме до Охрид за викенд. Возачот беше мошне љубезен, ни помогна со куферите. Цената беше договорена однапред, без изненадувања.",
       date: "5 јануари 2026",
+      isoDate: "2026-01-05",
     },
     {
       id: "5",
@@ -179,6 +183,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Брза резервација преку Viber, веднаш добив потврда. Возилото дојде точно на време. Ќе ги препорачам на сите!",
       date: "2 јануари 2026",
+      isoDate: "2026-01-02",
     },
     {
       id: "6",
@@ -186,6 +191,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Одлично искуство! Патував до Белград со нив, патот помина многу брзо. Имаше WiFi во возилото, возачот беше професионален.",
       date: "28 декември 2025",
+      isoDate: "2025-12-28",
     },
   ] : [
     {
@@ -194,6 +200,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Top service, the driver was very professional. He picked me up on time from the airport and brought me home without any issues. Highly recommend!",
       date: "January 15, 2026",
+      isoDate: "2026-01-15",
     },
     {
       id: "2",
@@ -201,6 +208,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Best taxi I've used to Thessaloniki. Clean vehicle, pleasant driver, and the price was fair. Will definitely call them again.",
       date: "January 12, 2026",
+      isoDate: "2026-01-12",
     },
     {
       id: "3",
@@ -208,6 +216,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "I've used them three times now and I'm always satisfied. Always on time for Skopje airport, the vehicle is comfortable. Excellent service!",
       date: "January 8, 2026",
+      isoDate: "2026-01-08",
     },
     {
       id: "4",
@@ -215,6 +224,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "We traveled to Ohrid for the weekend. The driver was very kind and helped us with the luggage. Price was agreed in advance, no surprises.",
       date: "January 5, 2026",
+      isoDate: "2026-01-05",
     },
     {
       id: "5",
@@ -222,6 +232,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Quick booking via Viber, immediately got confirmation. The vehicle arrived right on time. Will recommend to everyone!",
       date: "January 2, 2026",
+      isoDate: "2026-01-02",
     },
     {
       id: "6",
@@ -229,6 +240,7 @@ export default function ReviewsPage() {
       rating: 5,
       comment: "Excellent experience! Traveled to Belgrade with them, the trip went by quickly. There was WiFi in the vehicle, the driver was professional.",
       date: "December 28, 2025",
+      isoDate: "2025-12-28",
     },
   ];
 
@@ -261,7 +273,7 @@ export default function ReviewsPage() {
             ...sampleReviews.map((r) => ({
               "@type": "Review",
               author: { "@type": "Person", name: r.name },
-              datePublished: r.date,
+              datePublished: r.isoDate,
               reviewRating: {
                 "@type": "Rating",
                 ratingValue: r.rating,
