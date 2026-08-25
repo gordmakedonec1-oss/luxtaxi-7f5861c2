@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Seo } from "@/components/Seo";
 
 // Viber icon component
 const ViberIcon = ({ className }: { className?: string }) => (
@@ -129,6 +130,7 @@ export default function ContactPage() {
 
   return (
     <Layout>
+      <Seo page="contact" />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">

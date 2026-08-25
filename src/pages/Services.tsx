@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Car, Briefcase, Users, Plane, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Seo } from "@/components/Seo";
 
 export default function ServicesPage() {
   const { t } = useLanguage();
@@ -61,6 +62,7 @@ export default function ServicesPage() {
 
   return (
     <Layout>
+      <Seo page="services" />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-navy-light to-background">
         <div className="container-luxury text-center">

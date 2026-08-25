@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Award, Clock, Shield, Heart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
+import { Seo } from "@/components/Seo";
 
 export default function AboutPage() {
   const { t } = useLanguage();
@@ -41,6 +42,7 @@ export default function AboutPage() {
 
   return (
     <Layout>
+      <Seo page="about" />
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0">
