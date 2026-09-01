@@ -79,7 +79,7 @@ export function Footer() {
             <h4 className="text-lg font-serif font-semibold text-foreground mb-6">{t("footer.followUs")}</h4>
             <div className="flex gap-4">
               <a
-                href="https://www.facebook.com/profile.php?id=61586878543519"
+                href="https://www.facebook.com/profile.php?id=61593672223234"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
@@ -88,7 +88,9 @@ export function Footer() {
                 <Facebook className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/luxtaxi.mk/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 aria-label="Instagram"
               >
